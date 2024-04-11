@@ -1,4 +1,4 @@
-/* import {
+import {
   DataTypes,
   Model,
   InferCreationAttributes,
@@ -11,11 +11,13 @@ class SequelizeUser extends Model<InferAttributes<SequelizeUser>,
 InferCreationAttributes<SequelizeUser>> {
   declare id: CreationOptional<number>;
 
+  declare username: string;
+
+  declare role: string;
+
   declare email: string;
 
   declare password: string;
-
-  declare name: string;
 }
 
 SequelizeUser.init({
@@ -24,6 +26,9 @@ SequelizeUser.init({
     allowNull: false,
     primaryKey: true,
     autoIncrement: true,
+  },
+  username: {
+    type: DataTypes.STRING(100),
   },
   role: {
     type: DataTypes.STRING,
@@ -37,9 +42,6 @@ SequelizeUser.init({
     type: DataTypes.STRING(50),
     allowNull: false,
   },
-  name: {
-    type: DataTypes.STRING(100),
-  },
 }, {
   sequelize: db,
   modelName: 'users',
@@ -47,4 +49,3 @@ SequelizeUser.init({
 });
 
 export default SequelizeUser;
- */

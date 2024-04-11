@@ -1,4 +1,4 @@
-/* import { ID } from '.'; */
+import { ID } from '.';
 
 /* export interface ICRUDModelCreator<T> {
   create(data: Partial<T>): Promise<T>,
@@ -6,7 +6,7 @@
 
 export interface ICRUDModelReader<T> {
   findAll(): Promise<T[]>,
-/*   findById(id: ID): Promise<T | null>, */
+  findById(id: ID): Promise<T | null>,
 }
 
 /* export interface ICRUDModelUpdater<T> {

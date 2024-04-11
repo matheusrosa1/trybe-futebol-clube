@@ -1,0 +1,71 @@
+{
+    "client": "Thunder Client",
+    "collectionName": "Trybe Futebol Clube",
+    "dateExported": "2024-04-11T21:38:33.851Z",
+    "version": "1.1",
+    "folders": [
+        {
+            "_id": "029fff51-932c-4334-8869-c3dd8fb1319e",
+            "name": "Times",
+            "containerId": "",
+            "created": "2024-04-11T00:17:10.627Z",
+            "sortNum": 10000
+        },
+        {
+            "_id": "586eba17-18b2-4b4d-8f2c-29d89ef1daa5",
+            "name": "Login",
+            "containerId": "",
+            "created": "2024-04-11T21:34:33.388Z",
+            "sortNum": 20000
+        }
+    ],
+    "requests": [
+        {
+            "_id": "084cd41c-f14f-4454-b831-f13925530c66",
+            "colId": "80ce8724-e9d2-45e7-a6cd-dd78ffa5d4c6",
+            "containerId": "029fff51-932c-4334-8869-c3dd8fb1319e",
+            "name": "get All Teams",
+            "url": "http://localhost:3001/teams",
+            "method": "GET",
+            "sortNum": 10000,
+            "created": "2024-04-11T00:17:26.793Z",
+            "modified": "2024-04-11T00:17:42.953Z",
+            "headers": [],
+            "params": [],
+            "tests": []
+        },
+        {
+            "_id": "0352060e-1881-474f-a395-409ce859d253",
+            "colId": "80ce8724-e9d2-45e7-a6cd-dd78ffa5d4c6",
+            "containerId": "029fff51-932c-4334-8869-c3dd8fb1319e",
+            "name": "get Team by Id",
+            "url": "http://localhost:3001/teams/1",
+            "method": "GET",
+            "sortNum": 20000,
+            "created": "2024-04-11T02:42:53.922Z",
+            "modified": "2024-04-11T02:43:10.434Z",
+            "headers": [],
+            "params": [],
+            "tests": []
+        },
+        {
+            "_id": "05733f2e-bb77-4185-a1b5-bcef11a9603a",
+            "colId": "80ce8724-e9d2-45e7-a6cd-dd78ffa5d4c6",
+            "containerId": "586eba17-18b2-4b4d-8f2c-29d89ef1daa5",
+            "name": "post login",
+            "url": "http://localhost:3001/login",
+            "method": "POST",
+            "sortNum": 30000,
+            "created": "2024-04-11T21:34:45.884Z",
+            "modified": "2024-04-11T21:38:10.873Z",
+            "headers": [],
+            "params": [],
+            "body": {
+                "type": "json",
+                "raw": "{\n  \"email\": \"user@user.com\",\n  \"password\": \"secret_user\"\n}",
+                "form": []
+            },
+            "tests": []
+        }
+    ]
+}

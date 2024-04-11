@@ -1,4 +1,4 @@
-import { JwtPayload, Secret, SignOptions, sign, verify } from 'jsonwebtoken';
+import { JwtPayload, Secret, sign, SignOptions, verify } from 'jsonwebtoken';
 
 export default class Jwt {
   private static secret: Secret = process.env.JWT_SECRET || '';

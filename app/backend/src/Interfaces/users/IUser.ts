@@ -7,6 +7,7 @@ export interface ILogin {
 
 export interface IUser extends Identifiable, ILogin {
   username: string;
+  role: string;
 }
 
 export type IUserResponse = Omit<IUser, 'password'>;

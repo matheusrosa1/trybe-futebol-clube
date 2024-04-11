@@ -1,5 +1,4 @@
 import { Model, QueryInterface, DataTypes } from 'sequelize';
-import { username } from '../config/database';
 import { IUser } from '../../Interfaces/users/IUser'
 
 
@@ -13,6 +12,10 @@ export default {
         primaryKey: true,
       },
       username: {
+        type: DataTypes.STRING,
+        allowNull: false,
+      },
+      role: {
         type: DataTypes.STRING,
         allowNull: false,
       },

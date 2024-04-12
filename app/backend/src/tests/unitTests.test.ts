@@ -9,14 +9,17 @@ import Example from '../database/models/ExampleModel';
 import { Response } from 'superagent';
 import SequelizeTeam from '../database/models/SequelizeTeam';
 import { team, teams } from './mocks/Team.mock';
+import { user, userRegistered, validLoginBody } from './mocks/User.mock';
+import Jwt from '../utils/Jwt';
+import Validations from '../middlewares/Validations';
 
 chai.use(chaiHttp);
 
 const { expect } = chai;
 
 describe('Seu teste', () => { 
-  describe('GET /teams', function() {
-    it('deve retornar todos os times', async function() {
+  describe('/teams', function() {
+    it('deve retornar todos os times (GET ALL)', async function() {
       sinon.stub(SequelizeTeam, 'findAll').resolves(teams as any);
   
       const {status, body} = await chai.request(app).get('/teams');
@@ -25,7 +28,7 @@ describe('Seu teste', () => {
       expect(body).to.deep.equal(teams);
     });
   
-    it('deve retornar um time por id com sucesso', async function() {
+    it('deve retornar um time por id com sucesso (GET BY ID)', async function() {
       sinon.stub(SequelizeTeam, 'findOne').resolves(team as any);
       
       const { status, body } = await chai.request(app).get('/teams/1');
@@ -43,6 +46,18 @@ describe('Seu teste', () => {
       expect(body.message).to.equal('Team 999 not found');
     });
   
+  })
+  describe('/login', function() {
+    it('Testa se é possível fazer um login com sucesso e retorna um token (POST LOGIN)', async function() {
+      sinon.stub(SequelizeTeam, 'findOne').resolves(userRegistered as any);
+      sinon.stub(Jwt, 'sign').returns('validToken');
+      sinon.stub(Validations, 'validateLogin').returns()
+
+      const { status, body } = await chai.request(app).post('/login').send(validLoginBody);
+
+      expect(status).to.equal(200);
+      expect(body).to.have.key('token');
+    })
   })
 
   /**

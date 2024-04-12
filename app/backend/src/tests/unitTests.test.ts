@@ -9,7 +9,7 @@ import Example from '../database/models/ExampleModel';
 import { Response } from 'superagent';
 import SequelizeTeam from '../database/models/SequelizeTeam';
 import { team, teams } from './mocks/Team.mock';
-import { user, userRegistered, validLoginBody } from './mocks/User.mock';
+import { invalidEmailLoginBody, invalidPasswordLoginBody, user, userRegistered, validLoginBody } from './mocks/User.mock';
 import Jwt from '../utils/Jwt';
 import Validations from '../middlewares/Validations';
 
@@ -57,6 +57,33 @@ describe('Seu teste', () => {
 
       expect(status).to.equal(200);
       expect(body).to.have.key('token');
+    })
+
+    it('não é possivel efetuar login com uma senha incorreta', async function () {
+      sinon.stub(SequelizeTeam, 'findOne').resolves(invalidPasswordLoginBody as any);
+      sinon.stub(Jwt, 'sign').returns('validToken');
+      sinon.stub(Validations, 'validateLogin').returns();
+
+      const { status, body } = await chai.request(app)
+      .post('/login')
+      .send(invalidPasswordLoginBody);
+
+      expect(status).to.equal(401);
+      expect(body.message).to.equal('Invalid email or password');
+    });
+
+
+    it('não é possivel efetuar login com um email incorreto', async function () {
+      sinon.stub(SequelizeTeam, 'findOne').resolves(invalidEmailLoginBody as any);
+      sinon.stub(Jwt, 'sign').returns('validToken');
+      sinon.stub(Validations, 'validateLogin').returns();
+
+      const { status, body } = await chai.request(app)
+      .post('/login')
+      .send(invalidEmailLoginBody);
+
+      expect(status).to.equal(401);
+      expect(body.message).to.equal('Invalid email or password');
     })
   })
 

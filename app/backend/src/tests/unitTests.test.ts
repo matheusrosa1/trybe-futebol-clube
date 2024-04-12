@@ -4,9 +4,7 @@ import * as chai from 'chai';
 import chaiHttp = require('chai-http');
 
 import { app } from '../app';
-import Example from '../database/models/ExampleModel';
 
-import { Response } from 'superagent';
 import SequelizeTeam from '../database/models/SequelizeTeam';
 import { team, teams } from './mocks/Team.mock';
 import { invalidEmailLoginBody, invalidPasswordLoginBody, user, userRegistered, validLoginBody } from './mocks/User.mock';
@@ -17,7 +15,7 @@ chai.use(chaiHttp);
 
 const { expect } = chai;
 
-describe('Seu teste', () => { 
+describe('Test Routes', () => { 
   describe('/teams', function() {
     it('deve retornar todos os times (GET ALL)', async function() {
       sinon.stub(SequelizeTeam, 'findAll').resolves(teams as any);

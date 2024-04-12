@@ -31,7 +31,7 @@ class Validations {
     if (!token) {
       return res.status(404).json({ message: 'Token not found' });
     }
-    const verifyngToken = await Jwt.verify(token);
+    const verifyngToken = Jwt.verify(token);
     if (verifyngToken === 'Token must be a valid token') {
       return res.status(401).json({ message: verifyngToken });
     }

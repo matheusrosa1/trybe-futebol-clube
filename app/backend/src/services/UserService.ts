@@ -24,4 +24,9 @@ export default class UserService {
     }
     return { status: 'NOT_FOUND', data: { message: 'User not found' } };
   }
+
+/*   public async getRole(id: number):
+  Promise<ServiceResponse<ServiceMessage | ServiceRoleMessage>> {
+
+  } */
 }

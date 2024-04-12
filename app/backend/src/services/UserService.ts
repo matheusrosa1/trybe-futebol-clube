@@ -1,6 +1,6 @@
 import * as bcrypt from 'bcryptjs';
 import { ILogin, IUser } from '../Interfaces/users/IUser';
-import { ServiceMessage, ServiceResponse } from '../Interfaces/ServiceResponse';
+import { ServiceMessage, ServiceResponse, ServiceRoleMessage } from '../Interfaces/ServiceResponse';
 import { IUserModel } from '../Interfaces/users/IUserModel';
 import UserModel from '../models/UserModel';
 import { TokenType } from '../types/Token';
@@ -9,7 +9,6 @@ import Jwt from '../utils/Jwt';
 export default class UserService {
   constructor(
     private userModel: IUserModel = new UserModel(),
-    /*     private jwtService: Jwt, */
   ) { }
 
   public async login(data: ILogin): Promise<ServiceResponse<ServiceMessage | TokenType>> {
@@ -25,8 +24,13 @@ export default class UserService {
     return { status: 'NOT_FOUND', data: { message: 'User not found' } };
   }
 
-/*   public async getRole(id: number):
+  public async getRole(token: string):
   Promise<ServiceResponse<ServiceMessage | ServiceRoleMessage>> {
-
-  } */
+    const { email } = Jwt.verify(token) as IUser;
+    const user = await this.userModel.findByEmail(email);
+    if (user) {
+      return { status: 'SUCCESSFUL', data: { role: user.role } };
+    }
+    return { status: 'NOT_FOUND', data: { message: 'Token must be a valid token' } };
+  }
 }

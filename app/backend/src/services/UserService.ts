@@ -5,6 +5,7 @@ import { IUserModel } from '../Interfaces/users/IUserModel';
 import UserModel from '../models/UserModel';
 import { TokenType } from '../types/Token';
 import Jwt from '../utils/Jwt';
+// .
 
 export default class UserService {
   constructor(

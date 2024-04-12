@@ -19,19 +19,19 @@ export default class UserService {
         return { status: 'INVALID_DATA', data: { message: 'Invalid email or password' } };
       }
       const { email } = user as IUser;
-      const token = Jwt.sign({ email });
+      const token = await Jwt.sign({ email });
       return { status: 'SUCCESSFUL', data: { token } };
     }
-    return { status: 'NOT_FOUND', data: { message: 'User not found' } };
+    return { status: 'UNAUTHORIZED', data: { message: 'Invalid email or password' } };
   }
 
   public async getRole(token: string):
   Promise<ServiceResponse<ServiceMessage | ServiceRoleMessage>> {
-    const { email } = Jwt.verify(token) as IUser;
+    const { email } = await Jwt.verify(token) as IUser;
     const user = await this.userModel.findByEmail(email);
     if (user) {
       return { status: 'SUCCESSFUL', data: { role: user.role } };
     }
-    return { status: 'NOT_FOUND', data: { message: 'Token must be a valid token' } };
+    return { status: 'UNAUTHORIZED', data: { message: 'Token must be a valid token' } };
   }
 }

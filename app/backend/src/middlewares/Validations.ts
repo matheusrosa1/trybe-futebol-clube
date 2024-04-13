@@ -22,14 +22,14 @@ class Validations {
     res: Response,
     next: NextFunction,
   ): Promise<Response | void> {
-    const token = req.headers.authorization;
+    const token = req.headers.authorization?.split(' ')[1];
 
     if (!token) {
       return res.status(401).json({ message: 'Token not found' });
     }
     const verifyngToken = await Jwt.verify(token);
     if (verifyngToken === 'Token must be a valid token') {
-      console.log('verifytoken:', verifyngToken);
+      /*       console.log('verifytoken:', verifyngToken); */
       return res.status(401).json({ message: verifyngToken });
     }
 

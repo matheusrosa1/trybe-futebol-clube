@@ -14,7 +14,7 @@ export default class UserController {
   }
 
   public async gettingRole(req: Request, res: Response): Promise<Response> {
-    const token = req.headers.authorization;
+    const token = req.headers.authorization?.split(' ')[1];
     const { status, data } = await this.userService.getRole(token as string);
     return res.status(mapStatusHTTP(status)).json(data);
   }

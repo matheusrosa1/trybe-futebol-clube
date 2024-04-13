@@ -27,11 +27,11 @@ export default class UserService {
 
   public async getRole(token: string):
   Promise<ServiceResponse<ServiceMessage | ServiceRoleMessage>> {
-    const { email } = await Jwt.verify(token) as IUser;
-    const user = await this.userModel.findByEmail(email);
+    const validateToken = Jwt.verify(token) as IUser;
+    const user = await this.userModel.findByEmail(validateToken.email);
     if (user) {
       return { status: 'SUCCESSFUL', data: { role: user.role } };
     }
-    return { status: 'UNAUTHORIZED', data: { message: 'Token must be a valid token' } };
+    return { status: 'NOT_FOUND', data: { message: 'User not found' } };
   }
 }

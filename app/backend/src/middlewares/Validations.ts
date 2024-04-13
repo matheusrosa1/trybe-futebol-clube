@@ -11,10 +11,7 @@ class Validations {
 
     const emailRegex = /^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,3})+$/;
 
-    if (!emailRegex.test(email)) {
-      return res.status(401).json({ message: 'Invalid email or password' });
-    }
-    if (password.length < 6) {
+    if (!emailRegex.test(email) || password.length < 6) {
       return res.status(401).json({ message: 'Invalid email or password' });
     }
     return next();
@@ -32,6 +29,7 @@ class Validations {
     }
     const verifyngToken = await Jwt.verify(token);
     if (verifyngToken === 'Token must be a valid token') {
+      console.log('verifytoken:', verifyngToken);
       return res.status(401).json({ message: verifyngToken });
     }
 

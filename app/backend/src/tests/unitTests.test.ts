@@ -7,7 +7,7 @@ import { app } from '../app';
 
 import SequelizeTeam from '../database/models/SequelizeTeam';
 import { team, teams } from './mocks/Team.mock';
-import { invalidEmailLoginBody, invalidPasswordLoginBody, roleAdmin, user, userRegistered, validLoginBody } from './mocks/User.mock';
+import { invalidEmailLoginBody, invalidPasswordLoginBody, user, userRegistered, validLoginBody } from './mocks/User.mock';
 import Jwt from '../utils/Jwt';
 import Validations from '../middlewares/Validations';
 import SequelizeUser from '../database/models/SequelizeUser';
@@ -104,8 +104,24 @@ describe('Test Routes', () => {
         expect(res.status).to.equal(200);
         expect(res.body).to.have.property('role').that.equals(role);
       })
+      it('não é possível obter a role de um token inválido', async function() {
+        const token = 'token-inválido';
+  
+        sinon.stub(Jwt, 'verify').returns('Token must be a valid token');
+  
+        const res = await chai.request(app).get('/login/role').set('authorization', `Bearer ${token}`);
+  
+        expect(res.status).to.equal(401);
+        expect(res.body.message).to.equal('Token must be a valid token');
+      })
     })
-  })
+    it('Não é possível obter a role com um token não informado', async function() {
+      const res = await chai.request(app).get('/login/role');
+  
+      expect(res.status).to.equal(401);
+      expect(res.body.message).to.equal('Token not found');
+    })
+    })
 
   /**
    * Exemplo do uso de stubs com tipos

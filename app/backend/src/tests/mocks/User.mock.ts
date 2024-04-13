@@ -32,9 +32,6 @@ const invalidPasswordLoginBody = { email: 'jondoe@email.com', password: 'Jon' };
 const invalidEmailLoginBody = { email: 'invalid_email', password: 'JonDoe' };
 const userRegistered = { ...user, password: '$2a$08$xi.Hxk1czAO0nZR..B393u10aED0RQ1N3PAEXQ7HxtLjKPEZBu.PW' };
 
-const roleAdmin = {
-  role: 'admin'
-}
 
 const validToken = 'Bearer "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImFkbWluQGFkbWluLmNvbSIsImlhdCI6MTcxMzAyMjA5OCwiZXhwIjoxNzEzODg2MDk4fQ.A3DPyAvT5Dgp9iL550UqAO2W6AyIjlUdiRmfh2nCDSQ'
 
@@ -47,6 +44,5 @@ export {
   validLoginBody,
   wrongPassUser,
   userRegistered,
-  roleAdmin,
   validToken
 };

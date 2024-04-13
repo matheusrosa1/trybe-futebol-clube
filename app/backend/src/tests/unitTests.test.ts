@@ -7,9 +7,10 @@ import { app } from '../app';
 
 import SequelizeTeam from '../database/models/SequelizeTeam';
 import { team, teams } from './mocks/Team.mock';
-import { invalidEmailLoginBody, invalidPasswordLoginBody, user, userRegistered, validLoginBody } from './mocks/User.mock';
+import { invalidEmailLoginBody, invalidPasswordLoginBody, roleAdmin, user, userRegistered, validLoginBody } from './mocks/User.mock';
 import Jwt from '../utils/Jwt';
 import Validations from '../middlewares/Validations';
+import SequelizeUser from '../database/models/SequelizeUser';
 
 chai.use(chaiHttp);
 
@@ -25,7 +26,7 @@ describe('Test Routes', () => {
       expect(status).to.equal(200);
       expect(body).to.deep.equal(teams);
     });
-  
+    describe('/teams/:id', function() {
     it('deve retornar um time por id com sucesso (GET BY ID)', async function() {
       sinon.stub(SequelizeTeam, 'findOne').resolves(team as any);
       
@@ -43,7 +44,7 @@ describe('Test Routes', () => {
       expect(status).to.equal(404);
       expect(body.message).to.equal('Team 999 not found');
     });
-  
+    })
   })
   describe('/login', function() {
     it('Testa se é possível fazer um login com sucesso e retorna um token (POST LOGIN)', async function() {
@@ -82,6 +83,27 @@ describe('Test Routes', () => {
 
       expect(status).to.equal(401);
       expect(body.message).to.equal('Invalid email or password');
+    })
+    describe('/login/role', function() {
+      it('é possível obter a role de um token válido', async function() {
+        const token = 'seu-token-aqui';
+        const role = 'admin';
+        const roleReturn = { role };
+  
+        // Configurando stubs
+        sinon.stub(Jwt, 'verify').returns({ role }); // Mock de verificação do token
+        sinon.stub(Validations, 'validateToken').resolves(); // Mock de validação do token
+        sinon.stub(SequelizeUser, 'findOne').resolves(roleReturn as any); // Mock de consulta de usuário
+  
+        // Fazendo a requisição à rota de login
+        const res = await chai.request(app)
+          .get('/login/role')
+          .set('authorization', `Bearer ${token}`); // Adicionando o token de autorização no cabeçalho
+  
+        // Verificações
+        expect(res.status).to.equal(200);
+        expect(res.body).to.have.property('role').that.equals(role);
+      })
     })
   })
 

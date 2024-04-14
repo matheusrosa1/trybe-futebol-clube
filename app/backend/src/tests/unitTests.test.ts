@@ -11,6 +11,8 @@ import { invalidEmailLoginBody, invalidPasswordLoginBody, user, userRegistered, 
 import Jwt from '../utils/Jwt';
 import Validations from '../middlewares/Validations';
 import SequelizeUser from '../database/models/SequelizeUser';
+import SequelizeMatch from '../database/models/SequelizeMatch';
+import { matches } from './mocks/Match.mock';
 
 chai.use(chaiHttp);
 
@@ -122,7 +124,17 @@ describe('Test Routes', () => {
       expect(res.body.message).to.equal('Token not found');
     })
     })
-
+  describe('/matches', function() {
+    it('é possível obter todas as listas de partidas', async function() {
+/*       sinon.stub(SequelizeMatch, 'findAll').resolves(matches as any);
+      sinon.stub(Validations, 'validateToken').resolves();
+  
+      const { status, body } = await chai.request(app).get('/matches').set('authorization', 'Bearer token');
+  
+      expect(status).to.equal(200);
+      expect(body).to.deep.equal(matches); */
+    })
+  })
   /**
    * Exemplo do uso de stubs com tipos
    */

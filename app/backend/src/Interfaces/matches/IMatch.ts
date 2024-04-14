@@ -1,10 +1,6 @@
 import { Identifiable } from '..';
 import ITeam from '../teams/ITeam';
 
-/* type teamNameType = {
-  teamName: string;
-};
- */
 export default interface IMatch extends Identifiable {
   homeTeamId: number;
   homeTeamGoals: number;

@@ -22,4 +22,12 @@ export default class MatchModel implements IMatchModel {
     const { homeTeamId, homeTeamGoals, awayTeamId, awayTeamGoals, inProgress }: IMatch = dbData;
     return { id, homeTeamId, homeTeamGoals, awayTeamId, awayTeamGoals, inProgress };
   }
+
+  async findByQuery(q: string): Promise<IMatch[]> {
+    return this.model.findAll({
+      where: {
+        inProgress: q === 'true',
+      },
+    });
+  }
 }

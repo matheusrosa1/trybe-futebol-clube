@@ -1,4 +1,5 @@
-import { ICRUDModelReader } from '../ICRUDModel';
 import IMatch from './IMatch';
 
-export type IMatchModel = ICRUDModelReader<IMatch>; // ICRUDModel
+export default interface IMatchModel {
+  findAll(): Promise<IMatch[]>
+}

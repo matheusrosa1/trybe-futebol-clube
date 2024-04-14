@@ -1,6 +1,7 @@
-import { ICRUDModelReader } from '../ICRUDModel';
 import { IUser } from './IUser';
 
-export interface IUserModel extends ICRUDModelReader<IUser> {
-  findByEmail(email: IUser['email']): Promise<IUser | null>;
+export interface IUserModel {
+  findAll(): Promise<IUser[]>;
+  findById(id: number): Promise<IUser | null>,
+  findByEmail(email: IUser['email']): Promise<IUser | null>
 }

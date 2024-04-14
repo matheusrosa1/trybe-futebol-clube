@@ -1,4 +1,4 @@
-import { ITeamModel } from '../Interfaces/teams/ITeamModel';
+import ITeamModel from '../Interfaces/teams/ITeamModel';
 import ITeam from '../Interfaces/teams/ITeam';
 import SequelizeTeam from '../database/models/SequelizeTeam';
 

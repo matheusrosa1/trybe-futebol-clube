@@ -34,12 +34,12 @@ SequelizeMatch.init({
     type: DataTypes.INTEGER,
     allowNull: false,
     field: 'home_team_id',
-    references: {
+    /*     references: {
       model: 'teams',
       key: 'id',
     },
     onDelete: 'CASCADE',
-    onUpdate: 'CASCADE',
+    onUpdate: 'CASCADE', */
   },
   homeTeamGoals: {
     type: DataTypes.INTEGER,
@@ -50,12 +50,12 @@ SequelizeMatch.init({
     type: DataTypes.INTEGER,
     allowNull: false,
     field: 'away_team_id',
-    references: {
+    /*     references: {
       model: 'teams',
       key: 'id',
     },
     onDelete: 'CASCADE',
-    onUpdate: 'CASCADE',
+    onUpdate: 'CASCADE', */
   },
   awayTeamGoals: {
     type: DataTypes.INTEGER,
@@ -75,19 +75,21 @@ SequelizeMatch.init({
 
 SequelizeTeam.hasMany(SequelizeMatch, {
   foreignKey: 'homeTeamId',
-  as: 'matches',
+  as: 'homeMatches',
 });
 SequelizeTeam.hasMany(SequelizeMatch, {
   foreignKey: 'awayTeamId',
-  as: 'matches',
+  as: 'awayMatches',
 });
 
 SequelizeMatch.belongsTo(SequelizeTeam, {
   foreignKey: 'homeTeamId',
-  as: 'teams',
+  as: 'homeTeam',
 });
 
 SequelizeMatch.belongsTo(SequelizeTeam, {
   foreignKey: 'awayTeamId',
-  as: 'teams',
+  as: 'awayTeam',
 });
+
+export default SequelizeMatch;

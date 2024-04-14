@@ -126,13 +126,12 @@ describe('Test Routes', () => {
     })
   describe('/matches', function() {
     it('é possível obter todas as listas de partidas', async function() {
-/*       sinon.stub(SequelizeMatch, 'findAll').resolves(matches as any);
-      sinon.stub(Validations, 'validateToken').resolves();
+       sinon.stub(SequelizeMatch, 'findAll').resolves(matches as any);
   
-      const { status, body } = await chai.request(app).get('/matches').set('authorization', 'Bearer token');
+      const { status, body } = await chai.request(app).get('/matches');
   
       expect(status).to.equal(200);
-      expect(body).to.deep.equal(matches); */
+      expect(body).to.deep.equal(matches); 
     })
   })
   /**

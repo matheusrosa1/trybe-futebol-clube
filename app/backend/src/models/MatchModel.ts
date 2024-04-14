@@ -2,26 +2,18 @@ import SequelizeTeam from '../database/models/SequelizeTeam';
 import SequelizeMatch from '../database/models/SequelizeMatch';
 import IMatch from '../Interfaces/matches/IMatch';
 import { IMatchModel } from '../Interfaces/matches/IMatchModel';
-import ITeam from '../Interfaces/teams/ITeam';
+/* import ITeam from '../Interfaces/teams/ITeam'; */
 
 export default class MatchModel implements IMatchModel {
   private model = SequelizeMatch;
   async findAll(): Promise<IMatch[]> {
     const dbData = await this.model.findAll({
-      include: [{ model: SequelizeTeam, as: 'homeTeam', attributes: ['teamName'] },
-        { model: SequelizeTeam, as: 'awayTeam', attributes: ['teamName'] }] });
-    return dbData.map(({ id,
-      homeTeamId,
-      homeTeamGoals, awayTeamId, awayTeamGoals, inProgress, homeTeam, awayTeam }: IMatch) => (
-      { id,
-        homeTeamId,
-        homeTeamGoals,
-        awayTeamId,
-        awayTeamGoals,
-        inProgress,
-        homeTeam: { teamName: homeTeam?.teamName } as ITeam,
-        awayTeam: { teamName: awayTeam?.teamName } as ITeam,
-      }));
+      include: [
+        { model: SequelizeTeam, as: 'homeTeam', attributes: ['teamName'] },
+        { model: SequelizeTeam, as: 'awayTeam', attributes: ['teamName'] },
+      ],
+    });
+    return dbData;
   }
 
   async findById(id: number): Promise<IMatch | null> {

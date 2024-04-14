@@ -38,8 +38,6 @@ SequelizeMatch.init({
       model: 'teams',
       key: 'id',
     },
-    onDelete: 'CASCADE',
-    onUpdate: 'CASCADE',
   },
   homeTeamGoals: {
     type: DataTypes.INTEGER,
@@ -54,8 +52,6 @@ SequelizeMatch.init({
       model: 'teams',
       key: 'id',
     },
-    onDelete: 'CASCADE',
-    onUpdate: 'CASCADE',
   },
   awayTeamGoals: {
     type: DataTypes.INTEGER,

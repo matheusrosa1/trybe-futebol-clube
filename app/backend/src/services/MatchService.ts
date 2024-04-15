@@ -26,13 +26,12 @@ export default class MatchService {
       return { status: 'CONFLICT',
         data: { message: 'Não é possível finalizar uma partida já finalizada' } };
     } */
-    if (findMatch) {
-      const turnFinished = findMatch.inProgress === false;
-
-      await this.matchModel.update(id, { inProgress: turnFinished });
-      return { status: 'SUCCESSFUL', data: { message: 'Finished' } };
+    if (!findMatch) {
+      return { status: 'NOT_FOUND', data: { message: `Match ${id} not found` } };
     }
-    return { status: 'CONFLICT',
-      data: { message: 'Não é possível finalizar uma partida já finalizada' } };
+    const turnFinished = findMatch.inProgress === false;
+
+    await this.matchModel.update(id, { inProgress: turnFinished });
+    return { status: 'SUCCESSFUL', data: { message: 'Finished' } };
   }
 }

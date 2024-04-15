@@ -12,7 +12,7 @@ import Jwt from '../utils/Jwt';
 import Validations from '../middlewares/Validations';
 import SequelizeUser from '../database/models/SequelizeUser';
 import SequelizeMatch from '../database/models/SequelizeMatch';
-import { matches, matchesInProgress, matchesIsNotInProgress } from './mocks/Match.mock';
+import { matchFinished, matchInProgress, matches, matchesInProgress, matchesIsNotInProgress } from './mocks/Match.mock';
 
 chai.use(chaiHttp);
 
@@ -149,6 +149,31 @@ describe('Test Routes', () => {
 
       expect(status).to.equal(200);
       expect(body).to.deep.equal(matchesIsNotInProgress);
+    })
+    describe('/matches/:id/finish', function() {
+      it('é possível finalizar uma partida com sucesso', async function() {
+        /*         const match = matches[0]; */
+        sinon.stub(SequelizeMatch, 'update').resolves([1] as any);
+        sinon.stub(SequelizeMatch, 'findByPk').resolves(matchFinished as any);
+        sinon.stub(Jwt, 'verify').resolves();
+        
+        const { status, body } = await chai
+          .request(app)
+          .patch('/matches/1/finish')
+          .set('authorization', 'Bearer token');
+
+        expect(status).to.equal(200);
+        expect(body.message).to.equal('Finished');
+      })
+       it('não é possível finalizar uma partida que não existe', async function() {
+        sinon.stub(SequelizeMatch, 'findByPk').resolves(null);
+        sinon.stub(Jwt, 'verify').resolves();
+
+        const { status, body } = await chai.request(app).patch('/matches/999/finish').set('authorization', 'Bearer token');;
+
+        expect(status).to.equal(404);
+        expect(body.message).to.equal('Match 999 not found');
+      }) 
     })
   })
   /**

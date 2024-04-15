@@ -119,7 +119,39 @@ const matchesIsNotInProgress = [
   }
 ]
 
+const matchInProgress = {
+  "id": 1,
+  "homeTeamId": 5,
+  "homeTeamGoals": 1,
+  "awayTeamId": 6,
+  "awayTeamGoals": 0,
+  "inProgress": true,
+  "homeTeam": {
+    "teamName": "Flamengo"
+  },
+  "awayTeam": {
+    "teamName": "Palmeiras"
+  }
+}
+
+const matchFinished = {
+  "id": 1,
+  "homeTeamId": 5,
+  "homeTeamGoals": 1,
+  "awayTeamId": 6,
+  "awayTeamGoals": 0,
+  "inProgress": false,
+  "homeTeam": {
+    "teamName": "Flamengo"
+  },
+  "awayTeam": {
+    "teamName": "Palmeiras"
+  }
+}
+
 export {
+  matchInProgress,
+  matchFinished,
   matches,
   matchesInProgress,
   matchesIsNotInProgress

@@ -1,4 +1,5 @@
 /* import { Op } from 'sequelize'; */
+import { NewEntity } from '../Interfaces/NewEntity';
 import IMatchModel from '../Interfaces/matches/IMatchModel';
 import SequelizeTeam from '../database/models/SequelizeTeam';
 import SequelizeMatch from '../database/models/SequelizeMatch';
@@ -34,5 +35,11 @@ export default class MatchModel implements IMatchModel {
         inProgress,
       },
     });
+  }
+
+  async update(id: number, data: Partial<NewEntity<IMatch>>): Promise<IMatch | null> {
+    const [affectedRows] = await this.model.update(data, { where: { id } });
+    if (affectedRows === 0) return null;
+    return this.findById(id);
   }
 }

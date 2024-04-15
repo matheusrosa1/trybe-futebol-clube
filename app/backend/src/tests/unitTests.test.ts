@@ -12,7 +12,7 @@ import Jwt from '../utils/Jwt';
 import Validations from '../middlewares/Validations';
 import SequelizeUser from '../database/models/SequelizeUser';
 import SequelizeMatch from '../database/models/SequelizeMatch';
-import { matches } from './mocks/Match.mock';
+import { matches, matchesInProgress, matchesIsNotInProgress } from './mocks/Match.mock';
 
 chai.use(chaiHttp);
 
@@ -133,6 +133,22 @@ describe('Test Routes', () => {
   
       expect(status).to.equal(200);
       expect(body).to.deep.equal(matches); 
+    })
+    it('é possível obter a lista de partidas em andamento quando a query for solicitada', async function() {
+      sinon.stub(SequelizeMatch, 'findAll').resolves(matchesInProgress as any);
+
+      const { status, body } = await chai.request(app).get('/matches?inProgress=true');
+
+      expect(status).to.equal(200);
+      expect(body).to.deep.equal(matchesInProgress);
+    })
+    it('é possível obetr a lista de partidas que não estão em danamento quando a query for solicitada', async function() {
+      sinon.stub(SequelizeMatch, 'findAll').resolves(matchesIsNotInProgress as any);
+
+      const { status, body } = await chai.request(app).get('/matches?inProgress=false');
+
+      expect(status).to.equal(200);
+      expect(body).to.deep.equal(matchesIsNotInProgress);
     })
   })
   /**

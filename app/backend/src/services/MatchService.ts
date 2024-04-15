@@ -20,13 +20,19 @@ export default class MatchService {
 
   public async finishingMatch(
     id: number,
-    /* finishedStatus: IMatch['inProgress'], */
-  ): Promise<ServiceResponse | ServiceMessage> {
+  ): Promise<ServiceResponse<ServiceMessage>> {
     const findMatch = await this.matchModel.findById(id);
-    if (findMatch?.inProgress === false) {
+    /*     if (findMatch?.inProgress === false) {
       return { status: 'CONFLICT',
         data: { message: 'Não é possível finalizar uma partida já finalizada' } };
+    } */
+    if (findMatch) {
+      const turnFinished = findMatch.inProgress === false;
+
+      await this.matchModel.update(id, { inProgress: turnFinished });
+      return { status: 'SUCCESSFUL', data: { message: 'Finished' } };
     }
-    await this.matchModel.update(id);
+    return { status: 'CONFLICT',
+      data: { message: 'Não é possível finalizar uma partida já finalizada' } };
   }
 }

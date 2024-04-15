@@ -19,4 +19,10 @@ export default class MatchController {
       .getMatchesByQuery(transformingQuery as boolean);
     return res.status(mapStatusHTTP(status)).json(data);
   }
+
+  public async finishingMatch(req: Request, res: Response): Promise<Response> {
+    const { id } = req.params;
+    const { status, data } = await this.matchService.finishingMatch(+id);
+    return res.status(mapStatusHTTP(status)).json(data);
+  }
 }

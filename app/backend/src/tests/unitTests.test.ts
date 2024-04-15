@@ -49,8 +49,8 @@ describe('Test Routes', () => {
     })
   })
   describe('/login', function() {
-    it('Testa se é possível fazer um login com sucesso e retorna um token (POST LOGIN)', async function() {
-      sinon.stub(SequelizeTeam, 'findOne').resolves(userRegistered as any);
+  it('Testa se é possível fazer um login com sucesso e retorna um token (POST LOGIN)', async function() {
+      sinon.stub(SequelizeUser, 'findOne').resolves(userRegistered as any);
       sinon.stub(Jwt, 'sign').returns('validToken');
       sinon.stub(Validations, 'validateLogin').returns()
 
@@ -118,6 +118,7 @@ describe('Test Routes', () => {
       })
     })
     it('Não é possível obter a role com um token não informado', async function() {
+      sinon.stub(Jwt, 'verify').returns('Token not found');
       const res = await chai.request(app).get('/login/role');
   
       expect(res.status).to.equal(401);

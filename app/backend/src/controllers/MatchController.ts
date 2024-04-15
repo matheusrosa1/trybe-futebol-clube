@@ -14,7 +14,9 @@ export default class MatchController {
 
   public async getMatchesByQuery(req: Request, res: Response): Promise<Response> {
     const { inProgress } = req.query;
-    const { status, data } = await this.matchService.getMatchesByQuery(inProgress as string);
+    const transformingQuery = inProgress === 'true' ?? true;
+    const { status, data } = await this.matchService
+      .getMatchesByQuery(transformingQuery as boolean);
     return res.status(mapStatusHTTP(status)).json(data);
   }
 }

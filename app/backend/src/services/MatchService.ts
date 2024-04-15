@@ -13,7 +13,7 @@ export default class MatchService {
     return { status: 'SUCCESSFUL', data: allMatches };
   }
 
-  public async getMatchesByQuery(q: string): Promise<ServiceResponse<IMatch[]>> {
+  public async getMatchesByQuery(q: boolean): Promise<ServiceResponse<IMatch[]>> {
     const matchesByQuery = await this.matchModel.findByQuery(q);
     return { status: 'SUCCESSFUL', data: matchesByQuery };
   }

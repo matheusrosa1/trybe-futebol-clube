@@ -11,8 +11,13 @@ const router = Router();
 router.get(
   '/',
   errorMiddleware,
-  /*   Validations.validateToken, */
   (req: Request, res: Response) => matchController.getAllMatches(req, res),
+);
+
+router.get(
+  '/',
+  errorMiddleware,
+  (req: Request, res: Response) => matchController.getMatchesByQuery(req, res),
 );
 
 export default router;

@@ -29,4 +29,18 @@ export default class MatchService {
     await this.matchModel.update(id, { inProgress: turnFinished });
     return { status: 'SUCCESSFUL', data: { message: 'Finished' } };
   }
+
+  public async updateMatch(id: number, data: IMatch) {
+    const findMatch = await this.matchModel.findById(id);
+
+    if (!findMatch) {
+      return { status: 'NOT_FOUND', data: { message: 'There is no team with such id!' } };
+    }
+
+    await this.matchModel.update(id, data);
+
+    const updatedMatch = await this.matchModel.findById(id);
+
+    return { status: 'SUCCESSFUL', data: updatedMatch };
+  }
 }

@@ -28,4 +28,11 @@ router.patch(
   (req: Request, res: Response) => matchController.finishingMatch(req, res),
 );
 
+router.patch(
+  '/:id',
+  errorMiddleware,
+  Validations.validateToken,
+  (req: Request, res: Response) => matchController.updateMatch(req, res),
+);
+
 export default router;

@@ -12,7 +12,8 @@ import Jwt from '../utils/Jwt';
 import Validations from '../middlewares/Validations';
 import SequelizeUser from '../database/models/SequelizeUser';
 import SequelizeMatch from '../database/models/SequelizeMatch';
-import { matchFinished, matchInProgress, matches, matchesInProgress, matchesIsNotInProgress } from './mocks/Match.mock';
+import { matchFinished, matchInProgress, matchMock, matches, matchesInProgress, matchesIsNotInProgress } from './mocks/Match.mock';
+import { match } from 'assert';
 
 chai.use(chaiHttp);
 
@@ -174,36 +175,35 @@ describe('Test Routes', () => {
         expect(status).to.equal(404);
         expect(body.message).to.equal('Match 999 not found');
       }) 
+      describe('/matches/:id', function() {
+        it('é possível fazer um update de uma partida com sucesso', async function() {
+          sinon.stub(SequelizeMatch, 'update').resolves([1] as any);
+          sinon.stub(SequelizeMatch, 'findByPk').resolves(matchMock as any);
+          sinon.stub(Jwt, 'verify').resolves();
+
+          const { id, ...sendData } = matchMock;
+  
+          const { status, body } = await chai
+            .request(app)
+            .patch('/matches/1')
+            .send(sendData)
+            .set('authorization', 'Bearer token');
+  
+          expect(status).to.equal(200);
+          expect(body).to.deep.equal(matchMock);
+        })
+        it('não é possível fazer um update de uma partida que não existe', async function() {
+          sinon.stub(SequelizeMatch, 'findByPk').resolves(null);
+          sinon.stub(Jwt, 'verify').resolves();
+  
+          const { status, body } = await chai.request(app).patch('/matches/999').set('authorization', 'Bearer token');
+  
+          expect(status).to.equal(404);
+          expect(body.message).to.equal('There is no team with such id!');
+        })
+      })
     })
   })
-  /**
-   * Exemplo do uso de stubs com tipos
-   */
-
-  // let chaiHttpResponse: Response;
-
-  // before(async () => {
-  //   sinon
-  //     .stub(Example, "findOne")
-  //     .resolves({
-  //       ...<Seu mock>
-  //     } as Example);
-  // });
-
-  // after(()=>{
-  //   (Example.findOne as sinon.SinonStub).restore();
-  // })
-
-  // it('...', async () => {
-  //   chaiHttpResponse = await chai
-  //      .request(app)
-  //      ...
-
-  //   expect(...)
-  // });
-
-/*   it('Seu sub-teste', () => {
-    expect(false).to.be.eq(true);
-  }); */
+  
   afterEach(sinon.restore);
 });

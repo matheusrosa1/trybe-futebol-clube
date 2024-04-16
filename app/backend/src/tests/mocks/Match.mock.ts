@@ -149,10 +149,20 @@ const matchFinished = {
   }
 }
 
+const matchMock = {
+  "id": 1,
+  "homeTeamId": 5,
+  "homeTeamGoals": 1,
+  "awayTeamId": 6,
+  "awayTeamGoals": 0,
+  "inProgress": true,
+}
+
 export {
   matchInProgress,
   matchFinished,
   matches,
   matchesInProgress,
-  matchesIsNotInProgress
+  matchesIsNotInProgress,
+  matchMock
 }

@@ -7,4 +7,5 @@ export default interface IMatchModel {
   findById(id: number): Promise<IMatch | null>;
   findByQuery(q: boolean): Promise<IMatch[]>;
   update(id: IMatch['id'], data: Partial<NewEntity<IMatch>>): Promise<IMatch | null>
+  create(data: Partial<IMatch>): Promise<IMatch>
 }

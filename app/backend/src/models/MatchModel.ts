@@ -40,9 +40,9 @@ export default class MatchModel implements IMatchModel {
   async update(
     id: number,
     data: Partial<NewEntity<IMatch>>,
-  ): Promise<void> {
-    /*     const [affectedRows] =  */await this.model.update(data, { where: { id } });
-    /*     if (affectedRows === 0) return null; */
-    /*     return this.findById(id); */
+  ): Promise<IMatch | null> {
+    const [affectedRows] = await this.model.update(data, { where: { id } });
+    if (affectedRows === 0) return null;
+    return this.findById(id);
   }
 }

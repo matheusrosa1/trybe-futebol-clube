@@ -37,9 +37,7 @@ export default class MatchService {
       return { status: 'NOT_FOUND', data: { message: 'There is no team with such id!' } };
     }
 
-    await this.matchModel.update(id, data);
-
-    const updatedMatch = await this.matchModel.findById(id);
+    const updatedMatch = await this.matchModel.update(id, data);
 
     return { status: 'SUCCESSFUL', data: updatedMatch };
   }

@@ -151,6 +151,48 @@ describe('Test Routes', () => {
       expect(status).to.equal(200);
       expect(body).to.deep.equal(matchesIsNotInProgress);
     })
+    describe('/POST', function() {
+      it(' é possível criar uma partida com sucesso', async function() {
+        sinon.stub(SequelizeMatch, 'create').resolves(matchMock as any);
+        sinon.stub(SequelizeTeam, 'findByPk').resolves(team as any);
+        sinon.stub(Jwt, 'verify').resolves();
+  
+        const { status, body } = await chai
+          .request(app)
+          .post('/matches')
+          .send(matchMock)
+          .set('authorization', 'Bearer token');
+  
+        expect(status).to.equal(201);
+        expect(body).to.deep.equal(matchMock);
+      })
+    })
+    it('não é possível criar uma partida com um time que não existe', async function() {  
+      sinon.stub(SequelizeTeam, 'findByPk').resolves(null);
+      sinon.stub(Jwt, 'verify').resolves();
+  
+      const { status, body } = await chai
+        .request(app)
+        .post('/matches')
+        .send(matchMock)
+        .set('authorization', 'Bearer token');
+  
+      expect(status).to.equal(404);
+      expect(body.message).to.equal('There is no team with such id!');
+    })
+    it('não é possível criar uma partida com dois times iguais', async function() {
+      sinon.stub(SequelizeTeam, 'findByPk').resolves(team as any);
+      sinon.stub(Jwt, 'verify').resolves();
+  
+      const { status, body } = await chai
+        .request(app)
+        .post('/matches')
+        .send({ ...matchMock, awayTeamId: 1, homeTeamId: 1 })
+        .set('authorization', 'Bearer token');
+  
+      expect(status).to.equal(422);
+      expect(body.message).to.equal('It is not possible to create a match with two equal teams');
+    })
     describe('/matches/:id/finish', function() {
       it('é possível finalizar uma partida com sucesso', async function() {
         /*         const match = matches[0]; */

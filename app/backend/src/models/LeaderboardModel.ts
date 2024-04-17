@@ -109,7 +109,23 @@ export default class LeaderboardModel implements ILeaderboardModel {
     totalGames: number,
   ): string => ((totalPoints / (totalGames * 3)) * 100).toFixed(2);
 
-  async getLeaderboard(): Promise<Partial<ILeaderboard>[]> {
+  async getMinimalLeaderboard(): Promise<Partial<ILeaderboard>[]> {
+    const teams = await this.getTeams();
+    const mappingTeams = teams.map(async (team) => (
+      { name: team.teamName,
+        totalPoints: await this.getTotalPoints(team.id),
+        totalGames: await this.getTotalGames(team.id),
+        totalVictories: await this.getTotalVictories(team.id),
+        totalDraws: await this.getTotalDraws(team.id),
+        totalLosses: await this.getTotalLosses(team.id),
+        goalsFavor: await this.getGoalsFavor(team.id),
+        goalsOwn: await this.getGoalsOwn(team.id),
+      }
+    ));
+    return Promise.all(mappingTeams);
+  }
+
+  async getLeaderboard(): Promise<ILeaderboard[]> {
     const teams = await this.getTeams();
     const mappingTeams = teams.map(async (team) => (
       { name: team.teamName,

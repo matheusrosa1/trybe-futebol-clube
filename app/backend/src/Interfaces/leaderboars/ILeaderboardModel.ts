@@ -3,5 +3,6 @@
 import ILeaderboard from './ILeaderboard';
 
 export default interface ILeaderboardModel {
-  getLeaderboard(): Promise<Partial<ILeaderboard>[]>;
+  getMinimalLeaderboard(): Promise<Partial<ILeaderboard>[]>;
+  getLeaderboard(): Promise<ILeaderboard[]>;
 }

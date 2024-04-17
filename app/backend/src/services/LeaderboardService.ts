@@ -8,7 +8,8 @@ export default class LeaderboardService {
   ) { }
 
   public async getAllLeaderboard(): Promise<ServiceResponse<Partial<ILeaderboard>[]>> {
-    const allLeaderBoards = await this.leaderboardModel.getLeaderboard();
-    return { status: 'SUCCESSFUL', data: allLeaderBoards };
+    const leaderboards = await this.leaderboardModel.getMinimalLeaderboard();
+
+    return { status: 'SUCCESSFUL', data: leaderboards };
   }
 }

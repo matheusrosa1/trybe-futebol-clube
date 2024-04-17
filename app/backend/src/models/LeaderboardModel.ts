@@ -28,13 +28,6 @@ export default class LeaderboardModel implements ILeaderboardModel {
     return this.matchModel.findAll({ where: { inProgress: false, awayTeamId: teamId } });
   }
 
-  /*   async getMatchByTeamId(teamId: number): Promise<IMatch[]> {
-    const getFinalizedMatches = await this.getFinalizedMatches();
-    const matchesByTeam = getFinalizedMatches
-      .filter((match) => match.homeTeamId === teamId || match.awayTeamId === teamId);
-    return matchesByTeam;
-  } */
-
   async getMatchesByTeamId(teamId: number, matchType: matchType): Promise<IMatch[]> {
     let getMatches: IMatch[];
 
@@ -51,7 +44,6 @@ export default class LeaderboardModel implements ILeaderboardModel {
       default:
         getMatches = await this.getAllFinalizedMatches();
     }
-    /*     const getFinalizedMatches = await this.getAllFinalizedMatches(); */
     const matchesByTeam = getMatches
       .filter((match) => match.homeTeamId === teamId || match.awayTeamId === teamId);
     return matchesByTeam;
@@ -128,10 +120,6 @@ export default class LeaderboardModel implements ILeaderboardModel {
     return (totalVictories * 3) + totalDraws;
   }
 
-  /*   async calculateEfficiency(totalPoints: number, totalGames: number): Promise<number> {
-    return (totalPoints / (totalGames * 3)) * 100;
-  } */
-
   async getGoalsBalance(teamId: number, matchType: matchType): Promise<number> {
     return await this.getGoalsFavor(teamId, matchType) - await this.getGoalsOwn(teamId, matchType);
   }
@@ -141,11 +129,6 @@ export default class LeaderboardModel implements ILeaderboardModel {
     totalGames: number,
   ): string => ((totalPoints / (totalGames * 3)) * 100).toFixed(2);
 
-  /*   async getLeaderboardForHomeTeam(): Promise<ILeaderboard> {
-    const teams = await this.getTeams();
-
-  }
- */
   async getMinimalLeaderboard(matchType: matchType): Promise<Partial<ILeaderboard>[]> {
     const teams = await this.getTeams();
     const mappingTeams = teams.map(async (team) => (

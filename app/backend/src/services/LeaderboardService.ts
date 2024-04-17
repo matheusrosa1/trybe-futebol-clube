@@ -12,7 +12,7 @@ export default class LeaderboardService {
   ) { }
 
   public async getLeaderboardforAllMatches() {
-    const leaderboards = await this.leaderboardModel.getLeaderboard('home');
+    const leaderboards = await this.leaderboardModel.getLeaderboard('finalized');
 
     return { status: 'SUCCESSFUL', data: leaderboards };
   }
@@ -20,12 +20,6 @@ export default class LeaderboardService {
   public async getLeaderboardForHomeTeams(): Promise<ServiceResponse<Partial<ILeaderboard>[]>> {
     const leaderboardsHomeTeams = await this.leaderboardModel.getMinimalLeaderboard('home');
 
-    /*     const filteringByHomeTeams = leaderboards.map(async (leaderboard) => {
-      const teamIdByName = await this.teamModel.findByName(leaderboard.name as string);
-      const team = await this.teamModel.findById(teamIdByName as number);
-      return { ...leaderboard, name: team?.teamName };
-    });
-    const filteringPromise = await Promise.all(filteringByHomeTeams); */
     return { status: 'SUCCESSFUL', data: leaderboardsHomeTeams };
   }
 }

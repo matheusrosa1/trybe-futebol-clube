@@ -91,17 +91,9 @@ export default class LeaderboardModel implements ILeaderboardModel {
   }
 
   async getTotalPoints(teamId: number): Promise<number> {
-    let points = 0;
-    const matchesByTeam = await this.getMatchByTeamId(teamId);
-    matchesByTeam.forEach((match) => {
-      if (match.awayTeamId === teamId && match.awayTeamGoals > match.homeTeamGoals) {
-        points += 3;
-      }
-      if (match.awayTeamGoals === match.homeTeamGoals) {
-        points += 1;
-      }
-    });
-    return points;
+    const totalVictories = await this.getTotalVictories(teamId);
+    const totalDraws = await this.getTotalDraws(teamId);
+    return (totalVictories * 3) + totalDraws;
   }
 
   /*   async calculateEfficiency(totalPoints: number, totalGames: number): Promise<number> {
@@ -115,22 +107,7 @@ export default class LeaderboardModel implements ILeaderboardModel {
   static getEficiency = (
     totalPoints: number,
     totalGames: number,
-  ): number => (totalPoints / (totalGames * 3)) * 100;
-
-  /*   async mapping(teams: Array) {
-    const mapping = teams.map(async (team) => {
-      const totalGames = await this.getTotalGames(team.id);
-      const totalVictories = await this.getTotalVictories(team.id);
-      const totalDraws = await this.getTotalDraws(team.id);
-      const totalLosses = await this.getTotalLosses(team.id);
-      const goalsFavor = await this.getGoalsFavor(team.id);
-      const goalsOwn = await this.getGoalsOwn(team.id);
-      const goalsBalance = await this.getGoalsBalance(team.id);
-      const totalPoints = await this.getTotalPoints(team.id);
-      const efficiency = LeaderboardModel.getEficiency(totalPoints, totalGames);
-    });
-    return mapping;
-  } */
+  ): number => parseFloat(((totalPoints / (totalGames * 3)) * 100).toFixed(2));
 
   async getLeaderboard(): Promise<Partial<ILeaderboard>[]> {
     const teams = await this.getTeams();

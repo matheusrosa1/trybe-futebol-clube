@@ -8,7 +8,7 @@ export default class LeaderboardController {
   ) { }
 
   public async getAllLeaderboard(_req: Request, res: Response): Promise<Response> {
-    const { status, data } = await this.leaderboardService.getAllLeaderboard();
+    const { status, data } = await this.leaderboardService.getLeaderboardForHomeTeams();
     return res.status(mapStatusHTTP(status)).json(data);
   }
 }

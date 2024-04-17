@@ -18,6 +18,10 @@ export default class LeaderboardModel implements ILeaderboardModel {
     return this.matchModel.findAll({ where: { inProgress: false } });
   }
 
+  async getFinalizedMatchesForHomeTeam(teamId: number): Promise<IMatch[]> {
+    return this.matchModel.findAll({ where: { inProgress: false, homeTeamId: teamId } });
+  }
+
   async getMatchByTeamId(teamId: number): Promise<IMatch[]> {
     const getFinalizedMatches = await this.getFinalizedMatches();
     const matchesByTeam = getFinalizedMatches

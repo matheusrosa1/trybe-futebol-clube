@@ -107,7 +107,7 @@ export default class LeaderboardModel implements ILeaderboardModel {
   static getEficiency = (
     totalPoints: number,
     totalGames: number,
-  ): number => parseFloat(((totalPoints / (totalGames * 3)) * 100).toFixed(2));
+  ): string => ((totalPoints / (totalGames * 3)) * 100).toFixed(2);
 
   async getLeaderboard(): Promise<Partial<ILeaderboard>[]> {
     const teams = await this.getTeams();

@@ -1,5 +1,7 @@
+import ITeam from '../teams/ITeam';
+
 export default interface ILeaderboard {
-  name: string;
+  name: ITeam['teamName'];
   totalPoints: number;
   totalGames: number;
   totalVictories: number;

@@ -12,7 +12,7 @@ export default class LeaderboardService {
   ) { }
 
   public async getLeaderboardforAllMatches() {
-    const leaderboards = await this.leaderboardModel.getLeaderboard('finalized');
+    const leaderboards = await this.leaderboardModel.getLeaderboardSortedByPoints('finalized');
 
     return { status: 'SUCCESSFUL', data: leaderboards };
   }

@@ -165,4 +165,45 @@ export default class LeaderboardModel implements ILeaderboardModel {
     ));
     return Promise.all(mappingTeams);
   }
+
+  async getLeaderboardSortedByPoints(matchType: matchType): Promise<ILeaderboard[]> {
+    const allLeaderboard = await this.getLeaderboard(matchType);
+    return allLeaderboard.sort((a, b) => b.totalPoints - a.totalPoints);
+  }
+
+  async getLeaderboardByVictories(matchType: matchType):Promise<ILeaderboard[]> {
+    const sortedByPointsLeaderboard = await this.getLeaderboardSortedByPoints(matchType);
+    for (let index = 0; index < sortedByPointsLeaderboard.length - 1; index += 1) {
+      const leaderboard = sortedByPointsLeaderboard[index];
+      const nextLeaderboard = sortedByPointsLeaderboard[index + 1];
+      if (leaderboard.totalPoints === nextLeaderboard.totalPoints) {
+        return sortedByPointsLeaderboard.sort((a, b) => b.totalVictories - a.totalVictories);
+      }
+    }
+    return sortedByPointsLeaderboard;
+  }
+
+  async getLeaderboardByGoalsBalance(matchType: matchType): Promise<ILeaderboard[]> {
+    const sortedByVictoriesLeaderboard = await this.getLeaderboardByVictories(matchType);
+    for (let index = 0; index < sortedByVictoriesLeaderboard.length - 1; index += 1) {
+      const leaderboard = sortedByVictoriesLeaderboard[index];
+      const nextLeaderboard = sortedByVictoriesLeaderboard[index + 1];
+      if (leaderboard.totalVictories === nextLeaderboard.totalVictories) {
+        return sortedByVictoriesLeaderboard.sort((a, b) => b.goalsBalance - a.goalsBalance);
+      }
+    }
+    return sortedByVictoriesLeaderboard;
+  }
+
+  async getSortedLeaderboard(matchType: matchType): Promise<ILeaderboard[]> {
+    const sortedBByGoalsBalanceLaderboard = await this.getLeaderboardByGoalsBalance(matchType);
+    for (let index = 0; index < sortedBByGoalsBalanceLaderboard.length - 1; index += 1) {
+      const leaderboard = sortedBByGoalsBalanceLaderboard[index];
+      const nextLeaderboard = sortedBByGoalsBalanceLaderboard[index + 1];
+      if (leaderboard.goalsBalance === nextLeaderboard.goalsBalance) {
+        return sortedBByGoalsBalanceLaderboard.sort((a, b) => b.goalsFavor - a.goalsFavor);
+      }
+    }
+    return sortedBByGoalsBalanceLaderboard;
+  }
 }

@@ -117,8 +117,8 @@ export default class LeaderboardModel implements ILeaderboardModel {
     totalGames: number,
   ): number => (totalPoints / (totalGames * 3)) * 100;
 
-  async mapping(teams: Array) {
-    return teams.map(async (team) => {
+  /*   async mapping(teams: Array) {
+    const mapping = teams.map(async (team) => {
       const totalGames = await this.getTotalGames(team.id);
       const totalVictories = await this.getTotalVictories(team.id);
       const totalDraws = await this.getTotalDraws(team.id);
@@ -129,10 +129,27 @@ export default class LeaderboardModel implements ILeaderboardModel {
       const totalPoints = await this.getTotalPoints(team.id);
       const efficiency = LeaderboardModel.getEficiency(totalPoints, totalGames);
     });
-  }
+    return mapping;
+  } */
 
   async getLeaderboard(): Promise<Partial<ILeaderboard>[]> {
     const teams = await this.getTeams();
-    return this.mapping(teams);
+    const mappingTeams = teams.map(async (team) => (
+      { name: team.teamName,
+        totalPoints: await this.getTotalPoints(team.id),
+        totalGames: await this.getTotalGames(team.id),
+        totalVictories: await this.getTotalVictories(team.id),
+        totalDraws: await this.getTotalDraws(team.id),
+        totalLosses: await this.getTotalLosses(team.id),
+        goalsFavor: await this.getGoalsFavor(team.id),
+        goalsOwn: await this.getGoalsOwn(team.id),
+        goalsBalance: await this.getGoalsBalance(team.id),
+        efficiency: LeaderboardModel.getEficiency(
+          await this.getTotalPoints(team.id),
+          await this.getTotalGames(team.id),
+        ),
+      }
+    ));
+    return Promise.all(mappingTeams);
   }
 }

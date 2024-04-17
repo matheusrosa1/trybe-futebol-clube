@@ -9,5 +9,5 @@ const router = Router();
 router.use('/teams', teamsRouter);
 router.use('/login', loginRouter);
 router.use('/matches', matchesRouter);
-router.use('/leaderboards', leaderboards);
+router.use('/leaderboard', leaderboards);
 export default router;

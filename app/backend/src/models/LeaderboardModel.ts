@@ -5,6 +5,8 @@ import SequelizeTeam from '../database/models/SequelizeTeam';
 import ILeaderboardModel from '../Interfaces/leaderboars/ILeaderboardModel';
 import SequelizeMatch from '../database/models/SequelizeMatch';
 
+export type matchType = 'finalized' | 'home' | 'away';
+
 export default class LeaderboardModel implements ILeaderboardModel {
   private matchModel = SequelizeMatch;
   private teamModel = SequelizeTeam;
@@ -14,28 +16,54 @@ export default class LeaderboardModel implements ILeaderboardModel {
     return teams;
   }
 
-  async getFinalizedMatches(): Promise<IMatch[]> {
+  async getAllFinalizedMatches(): Promise<IMatch[]> {
     return this.matchModel.findAll({ where: { inProgress: false } });
   }
 
-  async getFinalizedMatchesForHomeTeam(teamId: number): Promise<IMatch[]> {
+  async getFinalizedMatchesForHomeTeams(teamId: number): Promise<IMatch[]> {
     return this.matchModel.findAll({ where: { inProgress: false, homeTeamId: teamId } });
   }
 
-  async getMatchByTeamId(teamId: number): Promise<IMatch[]> {
+  async getFinalizedMatchesForAwayTeams(teamId: number): Promise<IMatch[]> {
+    return this.matchModel.findAll({ where: { inProgress: false, awayTeamId: teamId } });
+  }
+
+  /*   async getMatchByTeamId(teamId: number): Promise<IMatch[]> {
     const getFinalizedMatches = await this.getFinalizedMatches();
     const matchesByTeam = getFinalizedMatches
       .filter((match) => match.homeTeamId === teamId || match.awayTeamId === teamId);
     return matchesByTeam;
+  } */
+
+  async getMatchesByTeamId(teamId: number, matchType: matchType): Promise<IMatch[]> {
+    let getMatches: IMatch[];
+
+    switch (matchType) {
+      case 'finalized':
+        getMatches = await this.getAllFinalizedMatches();
+        break;
+      case 'home':
+        getMatches = await this.getFinalizedMatchesForHomeTeams(teamId);
+        break;
+      case 'away':
+        getMatches = await this.getFinalizedMatchesForAwayTeams(teamId);
+        break;
+      default:
+        getMatches = await this.getAllFinalizedMatches();
+    }
+    /*     const getFinalizedMatches = await this.getAllFinalizedMatches(); */
+    const matchesByTeam = getMatches
+      .filter((match) => match.homeTeamId === teamId || match.awayTeamId === teamId);
+    return matchesByTeam;
   }
 
-  async getTotalGames(teamId: number): Promise<number> {
-    return (await this.getMatchByTeamId(teamId)).length;
+  async getTotalGames(teamId: number, matchType: matchType): Promise<number> {
+    return (await this.getMatchesByTeamId(teamId, matchType)).length;
   }
 
-  async getTotalVictories(teamId: number): Promise<number> {
+  async getTotalVictories(teamId: number, matchType: matchType): Promise<number> {
     let numberVictories = 0;
-    const matchesByTeam = await this.getMatchByTeamId(teamId);
+    const matchesByTeam = await this.getMatchesByTeamId(teamId, matchType);
     matchesByTeam.forEach((match) => {
       if (match.awayTeamId === teamId && match.awayTeamGoals > match.homeTeamGoals) {
         numberVictories += 1;
@@ -47,9 +75,9 @@ export default class LeaderboardModel implements ILeaderboardModel {
     return numberVictories;
   }
 
-  async getTotalDraws(teamId: number): Promise<number> {
+  async getTotalDraws(teamId: number, matchType: matchType): Promise<number> {
     let numberDraws = 0;
-    const matchesByTeam = await this.getMatchByTeamId(teamId);
+    const matchesByTeam = await this.getMatchesByTeamId(teamId, matchType);
     matchesByTeam.forEach((match) => {
       if (match.awayTeamGoals === match.homeTeamGoals) {
         numberDraws += 1;
@@ -58,9 +86,9 @@ export default class LeaderboardModel implements ILeaderboardModel {
     return numberDraws;
   }
 
-  async getTotalLosses(teamId: number): Promise<number> {
+  async getTotalLosses(teamId: number, matchType: matchType): Promise<number> {
     let numberLosses = 0;
-    const matchesByTeam = await this.getMatchByTeamId(teamId);
+    const matchesByTeam = await this.getMatchesByTeamId(teamId, matchType);
     matchesByTeam.forEach((match) => {
       if (match.awayTeamId === teamId && match.homeTeamGoals > match.awayTeamGoals) {
         numberLosses += 1;
@@ -72,8 +100,8 @@ export default class LeaderboardModel implements ILeaderboardModel {
     return numberLosses;
   }
 
-  async getGoalsFavor(teamId: number): Promise<number> {
-    const matchesByTeam = await this.getMatchByTeamId(teamId);
+  async getGoalsFavor(teamId: number, matchType: matchType): Promise<number> {
+    const matchesByTeam = await this.getMatchesByTeamId(teamId, matchType);
     const countingGoalsFavor = matchesByTeam.reduce((goalsFavor, match) => {
       if (match.homeTeamId === teamId) {
         return Number(goalsFavor) + Number(match.homeTeamGoals);
@@ -83,8 +111,8 @@ export default class LeaderboardModel implements ILeaderboardModel {
     return countingGoalsFavor;
   }
 
-  async getGoalsOwn(teamId: number): Promise<number> {
-    const matchesByTeam = await this.getMatchByTeamId(teamId);
+  async getGoalsOwn(teamId: number, matchType: matchType): Promise<number> {
+    const matchesByTeam = await this.getMatchesByTeamId(teamId, matchType);
     const countingGoalsFavor = matchesByTeam.reduce((goalsOwn, match) => {
       if (match.homeTeamId === teamId) {
         return goalsOwn + Number(match.awayTeamGoals);
@@ -94,9 +122,9 @@ export default class LeaderboardModel implements ILeaderboardModel {
     return countingGoalsFavor;
   }
 
-  async getTotalPoints(teamId: number): Promise<number> {
-    const totalVictories = await this.getTotalVictories(teamId);
-    const totalDraws = await this.getTotalDraws(teamId);
+  async getTotalPoints(teamId: number, matchType: matchType): Promise<number> {
+    const totalVictories = await this.getTotalVictories(teamId, matchType);
+    const totalDraws = await this.getTotalDraws(teamId, matchType);
     return (totalVictories * 3) + totalDraws;
   }
 
@@ -104,8 +132,8 @@ export default class LeaderboardModel implements ILeaderboardModel {
     return (totalPoints / (totalGames * 3)) * 100;
   } */
 
-  async getGoalsBalance(teamId: number): Promise<number> {
-    return await this.getGoalsFavor(teamId) - await this.getGoalsOwn(teamId);
+  async getGoalsBalance(teamId: number, matchType: matchType): Promise<number> {
+    return await this.getGoalsFavor(teamId, matchType) - await this.getGoalsOwn(teamId, matchType);
   }
 
   static getEficiency = (
@@ -118,37 +146,37 @@ export default class LeaderboardModel implements ILeaderboardModel {
 
   }
  */
-  async getMinimalLeaderboard(): Promise<Partial<ILeaderboard>[]> {
+  async getMinimalLeaderboard(matchType: matchType): Promise<Partial<ILeaderboard>[]> {
     const teams = await this.getTeams();
     const mappingTeams = teams.map(async (team) => (
       { name: team.teamName,
-        totalPoints: await this.getTotalPoints(team.id),
-        totalGames: await this.getTotalGames(team.id),
-        totalVictories: await this.getTotalVictories(team.id),
-        totalDraws: await this.getTotalDraws(team.id),
-        totalLosses: await this.getTotalLosses(team.id),
-        goalsFavor: await this.getGoalsFavor(team.id),
-        goalsOwn: await this.getGoalsOwn(team.id),
+        totalPoints: await this.getTotalPoints(team.id, matchType),
+        totalGames: await this.getTotalGames(team.id, matchType),
+        totalVictories: await this.getTotalVictories(team.id, matchType),
+        totalDraws: await this.getTotalDraws(team.id, matchType),
+        totalLosses: await this.getTotalLosses(team.id, matchType),
+        goalsFavor: await this.getGoalsFavor(team.id, matchType),
+        goalsOwn: await this.getGoalsOwn(team.id, matchType),
       }
     ));
     return Promise.all(mappingTeams);
   }
 
-  async getLeaderboard(): Promise<ILeaderboard[]> {
+  async getLeaderboard(matchType: matchType): Promise<ILeaderboard[]> {
     const teams = await this.getTeams();
     const mappingTeams = teams.map(async (team) => (
       { name: team.teamName,
-        totalPoints: await this.getTotalPoints(team.id),
-        totalGames: await this.getTotalGames(team.id),
-        totalVictories: await this.getTotalVictories(team.id),
-        totalDraws: await this.getTotalDraws(team.id),
-        totalLosses: await this.getTotalLosses(team.id),
-        goalsFavor: await this.getGoalsFavor(team.id),
-        goalsOwn: await this.getGoalsOwn(team.id),
-        goalsBalance: await this.getGoalsBalance(team.id),
+        totalPoints: await this.getTotalPoints(team.id, matchType),
+        totalGames: await this.getTotalGames(team.id, matchType),
+        totalVictories: await this.getTotalVictories(team.id, matchType),
+        totalDraws: await this.getTotalDraws(team.id, matchType),
+        totalLosses: await this.getTotalLosses(team.id, matchType),
+        goalsFavor: await this.getGoalsFavor(team.id, matchType),
+        goalsOwn: await this.getGoalsOwn(team.id, matchType),
+        goalsBalance: await this.getGoalsBalance(team.id, matchType),
         efficiency: LeaderboardModel.getEficiency(
-          await this.getTotalPoints(team.id),
-          await this.getTotalGames(team.id),
+          await this.getTotalPoints(team.id, matchType),
+          await this.getTotalGames(team.id, matchType),
         ),
       }
     ));

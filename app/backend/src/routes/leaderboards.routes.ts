@@ -7,13 +7,19 @@ const leaderboardController = new LeaderboardController();
 
 const router = Router();
 
-/* router.get('/', (req: Request, res: Response) => leaderboardController.getAllLeaderboard(req, res)); */
-
 router.get(
   '/home',
   errorMiddleware,
+  /*   Validations.validateToken, */
+  (req: Request, res: Response) => leaderboardController.getLeaderboardforHomeTeams(req, res),
+);
+
+router.get(
+  '/',
+  errorMiddleware,
   Validations.validateToken,
-  (req: Request, res: Response) => leaderboardController.getAllLeaderboard(req, res),
+  (req: Request, res: Response) =>
+    leaderboardController.getAllLeaderboards(req, res),
 );
 
 export default router;

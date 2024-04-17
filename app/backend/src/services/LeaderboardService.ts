@@ -22,4 +22,10 @@ export default class LeaderboardService {
 
     return { status: 'SUCCESSFUL', data: leaderboardsHomeTeams };
   }
+
+  public async getLeaderboardForAwayTeams(): Promise<ServiceResponse<Partial<ILeaderboard>[]>> {
+    const leaderboardsHomeTeams = await this.leaderboardModel.getMinimalLeaderboard('away');
+
+    return { status: 'SUCCESSFUL', data: leaderboardsHomeTeams };
+  }
 }

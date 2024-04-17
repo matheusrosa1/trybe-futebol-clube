@@ -15,6 +15,11 @@ router.get(
 );
 
 router.get(
+  '/away',
+  (req: Request, res: Response) => leaderboardController.getLeaderboardforAwayTeams(req, res),
+);
+
+router.get(
   '/',
   errorMiddleware,
   Validations.validateToken,

@@ -109,6 +109,11 @@ export default class LeaderboardModel implements ILeaderboardModel {
     totalGames: number,
   ): string => ((totalPoints / (totalGames * 3)) * 100).toFixed(2);
 
+  /*   async getLeaderboardForHomeTeam(): Promise<ILeaderboard> {
+    const teams = await this.getTeams();
+
+  }
+ */
   async getMinimalLeaderboard(): Promise<Partial<ILeaderboard>[]> {
     const teams = await this.getTeams();
     const mappingTeams = teams.map(async (team) => (

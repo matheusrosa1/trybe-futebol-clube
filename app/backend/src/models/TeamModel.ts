@@ -18,4 +18,11 @@ export default class TeamModel implements ITeamModel {
     const { teamName }: ITeam = dbData;
     return { id, teamName };
   }
+
+  async findByName(teamName: string): Promise<ITeam['id'] | null > {
+    const dbData = await this.model.findOne({ where: { teamName } });
+    if (!dbData) return null;
+    const { id }: ITeam = dbData;
+    return id;
+  }
 }

@@ -189,7 +189,10 @@ export default class LeaderboardModel implements ILeaderboardModel {
       const leaderboard = sortedByVictoriesLeaderboard[index];
       const nextLeaderboard = sortedByVictoriesLeaderboard[index + 1];
       if (leaderboard.totalVictories === nextLeaderboard.totalVictories) {
-        return sortedByVictoriesLeaderboard.sort((a, b) => b.goalsBalance - a.goalsBalance);
+        return sortedByVictoriesLeaderboard.sort((a, b) => {
+          if (a.goalsFavor < 0 && b.goalsFavor < 0) return a.goalsBalance - b.goalsBalance;
+          return b.goalsBalance - a.goalsBalance;
+        });
       }
     }
     return sortedByVictoriesLeaderboard;

@@ -18,13 +18,13 @@ export default class LeaderboardService {
   }
 
   public async getLeaderboardForHomeTeams(): Promise<ServiceResponse<Partial<ILeaderboard>[]>> {
-    const leaderboardsHomeTeams = await this.leaderboardModel.getMinimalLeaderboard('home');
+    const leaderboardsHomeTeams = await this.leaderboardModel.getLeaderboardSortedByPoints('home');
 
     return { status: 'SUCCESSFUL', data: leaderboardsHomeTeams };
   }
 
   public async getLeaderboardForAwayTeams(): Promise<ServiceResponse<Partial<ILeaderboard>[]>> {
-    const leaderboardsHomeTeams = await this.leaderboardModel.getMinimalLeaderboard('away');
+    const leaderboardsHomeTeams = await this.leaderboardModel.getLeaderboardSortedByPoints('away');
 
     return { status: 'SUCCESSFUL', data: leaderboardsHomeTeams };
   }

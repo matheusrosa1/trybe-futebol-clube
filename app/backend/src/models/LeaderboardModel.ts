@@ -177,7 +177,10 @@ export default class LeaderboardModel implements ILeaderboardModel {
       const leaderboard = sortedByPointsLeaderboard[index];
       const nextLeaderboard = sortedByPointsLeaderboard[index + 1];
       if (leaderboard.totalPoints === nextLeaderboard.totalPoints) {
-        return sortedByPointsLeaderboard.sort((a, b) => b.totalVictories - a.totalVictories);
+        const sortedByTotalVictories = sortedByPointsLeaderboard
+          .sort((a, b) => b.totalVictories - a.totalVictories);
+        sortedByPointsLeaderboard.splice(index, 2, ...sortedByTotalVictories);
+        index += 1;
       }
     }
     return sortedByPointsLeaderboard;
@@ -189,10 +192,12 @@ export default class LeaderboardModel implements ILeaderboardModel {
       const leaderboard = sortedByVictoriesLeaderboard[index];
       const nextLeaderboard = sortedByVictoriesLeaderboard[index + 1];
       if (leaderboard.totalVictories === nextLeaderboard.totalVictories) {
-        return sortedByVictoriesLeaderboard.sort((a, b) => {
+        const sortedByGoalsBalance = sortedByVictoriesLeaderboard.sort((a, b) => {
           if (a.goalsFavor < 0 && b.goalsFavor < 0) return a.goalsBalance - b.goalsBalance;
           return b.goalsBalance - a.goalsBalance;
         });
+        sortedByVictoriesLeaderboard.splice(index, 2, ...sortedByGoalsBalance);
+        index += 1;
       }
     }
     return sortedByVictoriesLeaderboard;
@@ -204,7 +209,10 @@ export default class LeaderboardModel implements ILeaderboardModel {
       const leaderboard = sortedBByGoalsBalanceLaderboard[index];
       const nextLeaderboard = sortedBByGoalsBalanceLaderboard[index + 1];
       if (leaderboard.goalsBalance === nextLeaderboard.goalsBalance) {
-        return sortedBByGoalsBalanceLaderboard.sort((a, b) => b.goalsFavor - a.goalsFavor);
+        const sortedByGoalsFavor = sortedBByGoalsBalanceLaderboard
+          .sort((a, b) => b.goalsFavor - a.goalsFavor);
+        sortedBByGoalsBalanceLaderboard.splice(index, 2, ...sortedByGoalsFavor);
+        index += 1;
       }
     }
     return sortedBByGoalsBalanceLaderboard;

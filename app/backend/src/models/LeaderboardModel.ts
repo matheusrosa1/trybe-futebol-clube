@@ -167,54 +167,18 @@ export default class LeaderboardModel implements ILeaderboardModel {
   }
 
   async getLeaderboardSortedByPoints(matchType: matchType): Promise<ILeaderboard[]> {
-    const allLeaderboard = await this.getLeaderboard(matchType);
-    return allLeaderboard.sort((a, b) => b.totalPoints - a.totalPoints);
-  }
-
-  async getLeaderboardByVictories(matchType: matchType):Promise<ILeaderboard[]> {
-    const sortedByPointsLeaderboard = await this.getLeaderboardSortedByPoints(matchType);
-    for (let index = 0; index < sortedByPointsLeaderboard.length - 1; index += 1) {
-      const leaderboard = sortedByPointsLeaderboard[index];
-      const nextLeaderboard = sortedByPointsLeaderboard[index + 1];
-      if (leaderboard.totalPoints === nextLeaderboard.totalPoints) {
-        const sortedByTotalVictories = sortedByPointsLeaderboard
-          .sort((a, b) => b.totalVictories - a.totalVictories);
-        sortedByPointsLeaderboard.splice(index, 2, ...sortedByTotalVictories);
-        index += 1;
-      }
-    }
-    return sortedByPointsLeaderboard;
-  }
-
-  async getLeaderboardByGoalsBalance(matchType: matchType): Promise<ILeaderboard[]> {
-    const sortedByVictoriesLeaderboard = await this.getLeaderboardByVictories(matchType);
-    for (let index = 0; index < sortedByVictoriesLeaderboard.length - 1; index += 1) {
-      const leaderboard = sortedByVictoriesLeaderboard[index];
-      const nextLeaderboard = sortedByVictoriesLeaderboard[index + 1];
-      if (leaderboard.totalVictories === nextLeaderboard.totalVictories) {
-        const sortedByGoalsBalance = sortedByVictoriesLeaderboard.sort((a, b) => {
-          if (a.goalsFavor < 0 && b.goalsFavor < 0) return a.goalsBalance - b.goalsBalance;
+    const leaderboard = await this.getLeaderboard(matchType);
+    return leaderboard.sort((a, b) => {
+      if (a.totalPoints === b.totalPoints) {
+        if (a.totalVictories === b.totalVictories) {
+          if (a.goalsBalance === b.goalsBalance) {
+            return b.goalsFavor - a.goalsFavor;
+          }
           return b.goalsBalance - a.goalsBalance;
-        });
-        sortedByVictoriesLeaderboard.splice(index, 2, ...sortedByGoalsBalance);
-        index += 1;
+        }
+        return b.totalVictories - a.totalVictories;
       }
-    }
-    return sortedByVictoriesLeaderboard;
-  }
-
-  async getSortedLeaderboard(matchType: matchType): Promise<ILeaderboard[]> {
-    const sortedBByGoalsBalanceLaderboard = await this.getLeaderboardByGoalsBalance(matchType);
-    for (let index = 0; index < sortedBByGoalsBalanceLaderboard.length - 1; index += 1) {
-      const leaderboard = sortedBByGoalsBalanceLaderboard[index];
-      const nextLeaderboard = sortedBByGoalsBalanceLaderboard[index + 1];
-      if (leaderboard.goalsBalance === nextLeaderboard.goalsBalance) {
-        const sortedByGoalsFavor = sortedBByGoalsBalanceLaderboard
-          .sort((a, b) => b.goalsFavor - a.goalsFavor);
-        sortedBByGoalsBalanceLaderboard.splice(index, 2, ...sortedByGoalsFavor);
-        index += 1;
-      }
-    }
-    return sortedBByGoalsBalanceLaderboard;
+      return b.totalPoints - a.totalPoints;
+    });
   }
 }

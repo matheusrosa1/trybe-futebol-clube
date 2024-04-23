@@ -14,7 +14,7 @@ import SequelizeUser from '../database/models/SequelizeUser';
 import SequelizeMatch from '../database/models/SequelizeMatch';
 import { matchFinished, matchInProgress, matchMock, matches, matchesInProgress, matchesIsNotInProgress } from './mocks/Match.mock';
 import { match } from 'assert';
-import { leaderboards, matchesForLeaderboard, teamsForLeaderboard } from './mocks/Leaderboard.mock';
+import { matchesForLeaderboard, sortedLeaderBoards, teamsForLeaderboard } from './mocks/Leaderboard.mock';
 
 chai.use(chaiHttp);
 
@@ -247,6 +247,15 @@ describe('Test Routes', () => {
       })
     })
     describe('/leaderboard', function() {
+      it('é possível obter o leaderboard de todos os times', async function() {
+        sinon.stub(SequelizeMatch, 'findAll').resolves(matchesForLeaderboard as any);
+        sinon.stub(SequelizeTeam, 'findAll').resolves(teamsForLeaderboard as any);
+  
+        const { status, body } = await chai.request(app).get('/leaderboard');
+  
+        expect(status).to.equal(200);
+        expect(body).to.deep.equal(sortedLeaderBoards);
+      })
       describe('/leaderboard/home', function() {
         it('é possível obtero leaderboard dos times de casa', async function() {
           sinon.stub(SequelizeMatch, 'findAll').resolves(matchesForLeaderboard as any);
@@ -255,9 +264,20 @@ describe('Test Routes', () => {
           const { status, body } = await chai.request(app).get('/leaderboard/home');
     
           expect(status).to.equal(200);
-          expect(body).to.deep.equal(leaderboards);
+          expect(body).to.deep.equal(sortedLeaderBoards);
         })
       });
+      describe('/leaderboard/away', function() {
+        it('é possível obter o leaderboard dos times de fora', async function() {
+          sinon.stub(SequelizeMatch, 'findAll').resolves(matchesForLeaderboard as any);
+          sinon.stub(SequelizeTeam, 'findAll').resolves(teamsForLeaderboard as any);
+    
+          const { status, body } = await chai.request(app).get('/leaderboard/away');
+    
+          expect(status).to.equal(200);
+          expect(body).to.deep.equal(sortedLeaderBoards);
+        })
+      })
       })
   })
   

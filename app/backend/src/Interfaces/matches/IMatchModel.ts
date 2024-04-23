@@ -1,5 +1,4 @@
 import { NewEntity } from '../NewEntity';
-/* import { ServiceMessage } from '../ServiceResponse'; */
 import IMatch from './IMatch';
 
 export default interface IMatchModel {

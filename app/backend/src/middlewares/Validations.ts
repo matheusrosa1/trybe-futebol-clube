@@ -28,7 +28,6 @@ class Validations {
       return res.status(401).json({ message: 'Token not found' });
     }
     const validToken = Jwt.verify(tokenWithoutBearer as string);
-    /*     console.log(validToken); */
     if (validToken === 'Token must be a valid token') {
       return res.status(401).json({ message: validToken });
     }

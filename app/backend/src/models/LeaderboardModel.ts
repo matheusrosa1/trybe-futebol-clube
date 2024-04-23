@@ -5,7 +5,7 @@ import SequelizeTeam from '../database/models/SequelizeTeam';
 import ILeaderboardModel from '../Interfaces/leaderboars/ILeaderboardModel';
 import SequelizeMatch from '../database/models/SequelizeMatch';
 
-export type matchType = 'finalized' | 'home' | 'away';
+type matchType = 'finalized' | 'home' | 'away';
 
 export default class LeaderboardModel implements ILeaderboardModel {
   private matchModel = SequelizeMatch;
@@ -129,22 +129,6 @@ export default class LeaderboardModel implements ILeaderboardModel {
     totalGames: number,
   ): string => ((totalPoints / (totalGames * 3)) * 100).toFixed(2);
 
-  async getMinimalLeaderboard(matchType: matchType): Promise<Partial<ILeaderboard>[]> {
-    const teams = await this.getTeams();
-    const mappingTeams = teams.map(async (team) => (
-      { name: team.teamName,
-        totalPoints: await this.getTotalPoints(team.id, matchType),
-        totalGames: await this.getTotalGames(team.id, matchType),
-        totalVictories: await this.getTotalVictories(team.id, matchType),
-        totalDraws: await this.getTotalDraws(team.id, matchType),
-        totalLosses: await this.getTotalLosses(team.id, matchType),
-        goalsFavor: await this.getGoalsFavor(team.id, matchType),
-        goalsOwn: await this.getGoalsOwn(team.id, matchType),
-      }
-    ));
-    return Promise.all(mappingTeams);
-  }
-
   async getLeaderboard(matchType: matchType): Promise<ILeaderboard[]> {
     const teams = await this.getTeams();
     const mappingTeams = teams.map(async (team) => (
@@ -166,7 +150,7 @@ export default class LeaderboardModel implements ILeaderboardModel {
     return Promise.all(mappingTeams);
   }
 
-  async getLeaderboardSortedByPoints(matchType: matchType): Promise<ILeaderboard[]> {
+  async getSortedLeaderboard(matchType: matchType): Promise<ILeaderboard[]> {
     const leaderboard = await this.getLeaderboard(matchType);
     return leaderboard.sort((a, b) => {
       if (a.totalPoints === b.totalPoints) {

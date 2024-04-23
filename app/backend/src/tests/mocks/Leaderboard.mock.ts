@@ -9,29 +9,6 @@ const teamsForLeaderboard = [
   },
 ];
 
-const leaderboards = [
-  {
-    name: 'Time 1',
-    totalPoints: 3,
-    totalGames: 1,
-    totalVictories: 1,
-    totalDraws: 0,
-    totalLosses: 0,
-    goalsFavor: 3,
-    goalsOwn: 1,
-  },
-  {
-    name: 'Time 2',
-    totalPoints: 0,
-    totalGames: 1,
-    totalVictories: 0,
-    totalDraws: 0,
-    totalLosses: 1,
-    goalsFavor: 1,
-    goalsOwn: 3,
-  },
-];
-
 const matchesForLeaderboard = [
   {
     id: 1,
@@ -42,6 +19,37 @@ const matchesForLeaderboard = [
   },
 ];
 
-export {leaderboards,
+const sortedLeaderBoards = [
+  {
+    name: 'Time 1',
+    totalPoints: 3,
+    totalGames: 1,
+    totalVictories: 1,
+    totalDraws: 0,
+    totalLosses: 0,
+    goalsFavor: 3,
+    goalsOwn: 1,
+    goalsBalance: 2,
+    efficiency: '100.00',
+  },
+  {
+    name: 'Time 2',
+    totalPoints: 0,
+    totalGames: 1,
+    totalVictories: 0,
+    totalDraws: 0,
+    totalLosses: 1,
+    goalsFavor: 1,
+    goalsOwn: 3,
+    goalsBalance: -2,
+    efficiency: '0.00',
+  },
+];
+
+
+
+export {
    matchesForLeaderboard,
-   teamsForLeaderboard}
+   teamsForLeaderboard,
+   sortedLeaderBoards
+}

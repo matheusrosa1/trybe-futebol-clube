@@ -1,5 +1,3 @@
-/* import ITeam from '../teams/ITeam'; */
-
 export default interface IMatch {
   id: number;
   homeTeamId: number;

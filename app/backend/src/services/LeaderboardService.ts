@@ -1,30 +1,26 @@
-import MatchModel from '../models/MatchModel';
 import { ServiceResponse } from '../Interfaces/ServiceResponse';
 import ILeaderboard from '../Interfaces/leaderboars/ILeaderboard';
 import LeaderboardModel from '../models/LeaderboardModel';
-import TeamModel from '../models/TeamModel';
 
 export default class LeaderboardService {
   constructor(
     private leaderboardModel = new LeaderboardModel(),
-    private matchModel = new MatchModel(),
-    private teamModel = new TeamModel(),
   ) { }
 
   public async getLeaderboardforAllMatches() {
-    const leaderboards = await this.leaderboardModel.getLeaderboardSortedByPoints('finalized');
+    const leaderboards = await this.leaderboardModel.getSortedLeaderboard('finalized');
 
     return { status: 'SUCCESSFUL', data: leaderboards };
   }
 
   public async getLeaderboardForHomeTeams(): Promise<ServiceResponse<Partial<ILeaderboard>[]>> {
-    const leaderboardsHomeTeams = await this.leaderboardModel.getLeaderboardSortedByPoints('home');
+    const leaderboardsHomeTeams = await this.leaderboardModel.getSortedLeaderboard('home');
 
     return { status: 'SUCCESSFUL', data: leaderboardsHomeTeams };
   }
 
   public async getLeaderboardForAwayTeams(): Promise<ServiceResponse<Partial<ILeaderboard>[]>> {
-    const leaderboardsHomeTeams = await this.leaderboardModel.getLeaderboardSortedByPoints('away');
+    const leaderboardsHomeTeams = await this.leaderboardModel.getSortedLeaderboard('away');
 
     return { status: 'SUCCESSFUL', data: leaderboardsHomeTeams };
   }

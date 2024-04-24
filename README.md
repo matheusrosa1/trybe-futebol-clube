@@ -55,11 +55,11 @@ Resetar o banco de dados: utilizar o comando `npm run db:reset` dentro do contai
 
 ## Funcionalidades
 
-- Alterar os placares das partidas (admin).
+- Alterar os placares das partidas (`admin`).
 - Filtrar as partidas:
   - Em andamento
   - Finalizada
-- Finalizar partidas (admin).
+- Finalizar partidas (`admin`).
 - Visualizar a Classificação dos times de acordo com os resultados e suas respectivas estatística dos jogos de cada time.
 - Filtrar a classificação:
   - Classificação Geral;
@@ -103,6 +103,8 @@ Utilizar o comando `npm run test` dentro da pasta trybe-futebol-clube/app/backen
 ## Website
 
 O aplicativo está disponível para consulta no link https://trybe-futebol-clube-production-cd38.up.railway.app/.
+
+Para vizualização das partidas e classificação é necessário logar com o usuário `user`, cujas informações de login estão situadas nos seeders ou no banco de dados.
 
 As funcionalidades de `admin` podem ser utilizadas somente via localhost, visto que o website é voltado somente para demonstração de portifólio.
 

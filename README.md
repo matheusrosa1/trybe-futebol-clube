@@ -38,10 +38,11 @@ Para instalar as dependências necessárias, execute o comando `npm install` na 
 Para iniciar a aplicação localmente em containers Docker, basta executar o comando `npm run compose:up` na raiz do projeto. Ao instalar o container, se corretamente instalado, os servidores já estarão automaticamente inicializados.
 
 #### Logs do container
+##### Back-end
+    docker logs -f app_backend
 
-- Backend: docker logs -f app_backend
-
-- Frontend: docker logs -f app_frontend
+##### Front-end
+    docker logs -f app_frontend
 
 ### Acesso ao banco de dados
 
@@ -60,10 +61,11 @@ A senha padrão para acessar o banco de dados SQL está definida na porta defini
   - Classificação dos Mandantes
   - Classificação dos Visitantes.
 
-        A classificação dos times no campeonato é de acordo com o `total de pontos` (decrescente), com o seguinte critério de desempate:
-          - Total de Vitórias;
-          - 2º Saldo de gols;
-          - 3º Gols a favor;
+A classificação dos times no campeonato é de acordo com o `total de pontos` (decrescente), com o seguinte critério de desempate:
+  - Total de Vitórias;
+  - 2º Saldo de gols;
+  - 3º Gols a favor;
+
 ## Como utilizar
 
 ### Front-end

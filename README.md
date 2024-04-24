@@ -35,7 +35,7 @@ Para instalar as dependências necessárias, execute o comando `npm install` na 
 
 ### Containers Docker
 
-Para iniciar a aplicação localmente em containers Docker, basta executar o comando `npm run compose:up` na raiz do projeto. Ao instalar o container, se corretamente instalado, os servidores já estarão automaticamente inicializados.
+Para iniciar a aplicação localmente em containers Docker, basta executar o comando `npm run compose:up` na raiz do projeto. Ao instalar o container, se corretamente instalado, o banco de dados já será iniciado e os servidores serão automaticamente inicializados.
 
 Para derrubar o container utilizar o comando `npm run compose:down`.
 
@@ -50,7 +50,9 @@ Para derrubar o container utilizar o comando `npm run compose:down`.
 
 ### Acesso ao banco de dados
 
-A senha padrão para acessar o banco de dados SQL está definida na porta definida por padrão `3306` e pode ser encontrada no arquivo `docker-compose.yaml`. Para acessar o frontend, utilize a porta definida por padrão `3000`.
+A senha padrão para acessar o banco de dados SQL está definida na porta definida por padrão `3306` e pode ser encontrada no arquivo `docker-compose.yaml`.
+
+Para resetar o banco de dados com os dados iniciais utilizar dentro do container backend o comando `npm run db:reset`.
 
 ## Funcionalidades
 

@@ -18,9 +18,9 @@ Uma visão geral mais detalhada do projeto, explicando o que ele faz, por que é
 
 ## Tecnologias Utilizadas
 
-- Docker
-- Typescript (POO)
+- Noje.js (Typescript - POO)
 - Sequelize
+- Docker
 - mysql2
 - Express
 - JSON Web Token (Jwt)
@@ -89,6 +89,8 @@ Para aproveitamento de todas as funcionalidades do apicativo realizar o login co
 Para execução dos testes (unitários) utilizar o comando `npm run test` dentro da pasta trybe-futebol-clube/app/backend 
 
 ## Licença
+
+Licença MIT 
 
 Declare a licença do projeto. Se você está utilizando uma licença padrão (por exemplo, MIT, Apache), inclua o texto da licença no README. Se estiver utilizando uma licença personalizada, forneça informações sobre ela.
 

@@ -31,13 +31,12 @@ A aplicação segue os princípios do SOLID (Single Responsibility Principle, Op
 
 ### Dependências
 
-Para instalar as dependências necessárias, execute o comando `npm install` na pasta raiz do projeto. Cada diretório (frontend e backend) possui suas próprias dependências. É possivel instalá-las de maneira rápida executando `npm run install:apps` na pasta raiz do projeto, ou executando `npm install` dentro de cada diretório separadamente.
+Instalar as dependências necessárias, execute o comando `npm install` na pasta raiz do projeto. Cada diretório (frontend e backend) possui suas próprias dependências. É possivel instalá-las de maneira rápida executando `npm run install:apps` na pasta raiz do projeto, ou executando `npm install` dentro de cada diretório separadamente.
 
 ### Containers Docker
 
 Para iniciar a aplicação localmente em containers Docker, basta executar o comando `npm run compose:up` na raiz do projeto. Ao instalar o container, se corretamente instalado, o banco de dados já será iniciado e os servidores serão automaticamente inicializados.
 
-Para derrubar o container utilizar o comando `npm run compose:down`.
 
 #### Logs do container
 
@@ -52,7 +51,7 @@ Para derrubar o container utilizar o comando `npm run compose:down`.
 
 A senha padrão para acessar o banco de dados SQL está definida na porta definida por padrão `3306` e pode ser encontrada no arquivo `docker-compose.yaml`.
 
-Para resetar o banco de dados com os dados iniciais utilizar dentro do container backend o comando `npm run db:reset`.
+Resetar o banco de dados: utilizar o comando `npm run db:reset` dentro do container backend.
 
 ## Funcionalidades
 
@@ -76,14 +75,14 @@ A classificação dos times no campeonato é de acordo com o `total de pontos` (
 
 ### Front-end
 
-Para abordagem visual, acessar a aplicação através de porta 3000.
+Acessar a aplicação através de porta 3000, definida como padrão do projeto.
 
-Para utilizar as funcionalidades do aplicativo no frontend, é necessário primeiro fazer login com um usuário cadastrado, usuário de login e senha informado estão fornacidos no seeder ou no banco de dados.
+Para utilizar as funcionalidades do aplicativo no frontend, é necessário primeiro fazer login com um usuário cadastrado, as informações de login estão fornecidos no seeder ou no banco de dados.
 
 
 ### Back-end
 
-Para as requisições backend utilizar o ThunderClient, Postman, Insomnia e afins. Basta importar o arquivo de coleção de requisições fornecido e começar as chamadas API.
+Utilizar ThunderClient, Postman, Insomnia e afins. Basta importar o arquivo de coleção de requisições fornecido e começar as chamadas API.
 
 Para as requisições no backend, também é necessário fazer login (POST /login). Após o login bem-sucedido, o backend irá gerar um token (bearer), que será utilizado em algumas requisições para autenticar e autorizar o acesso ao backend.
 , que deve ser apresentado no header Authentication com o seguinte formato: bearer: _token_
@@ -99,11 +98,11 @@ Para aproveitamento de todas as funcionalidades do apicativo realizar o login co
 
 ### Rodando os testes locais
 
-Para execução dos testes (unitários) utilizar o comando `npm run test` dentro da pasta trybe-futebol-clube/app/backend
+Utilizar o comando `npm run test` dentro da pasta trybe-futebol-clube/app/backend
 
 ## Contribuições
 
- O front-end e o design CSS deste projeto foram elaborados pela escola Trybe.
+O front-end e o design CSS deste projeto foram elaborados pela escola Trybe.
 
 ## Licença
 

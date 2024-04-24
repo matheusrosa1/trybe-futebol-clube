@@ -8,7 +8,7 @@ Projeto realizado para formação em back-end durante o curso da Trybe - Escola 
 - [Visão Geral](#visão-geral)
 - [Tecnologias Utilizadas](#tecnologias-utilizadas)
 - [Instalação](#instalação)
-- [Como Usar](#como-usar)
+- [Como utilizar](#como-utilizar)
 - [Licença](#licença)
 - [Contato](#contato)
 
@@ -60,7 +60,7 @@ A senha padrão para acessar o banco de dados SQL está definida na porta defini
   - Finalizada
 - Finalizar partidas.
 
-## Como ultilizar
+## Como utilizar
 
 ### Front-end
 Para abordagem visual, acessar a aplicação através de porta 3000.

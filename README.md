@@ -6,6 +6,7 @@
 - [Tecnologias Utilizadas](#tecnologias-utilizadas)
 - [Instalação](#instalação)
 - [Como utilizar](#como-utilizar)
+- [Contribuições](#contribuições)
 - [Licença](#licença)
 - [Contato](#contato)
 
@@ -35,6 +36,8 @@ Para instalar as dependências necessárias, execute o comando `npm install` na 
 ### Containers Docker
 
 Para iniciar a aplicação localmente em containers Docker, basta executar o comando `npm run compose:up` na raiz do projeto. Ao instalar o container, se corretamente instalado, os servidores já estarão automaticamente inicializados.
+
+Para derrubar o container utilizar o comando `npm run compose:down`.
 
 #### Logs do container
 

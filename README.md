@@ -67,6 +67,8 @@ Para abordagem visual, acessar a aplicação através de porta 3000.
 
 Para utilizar as funcionalidades do aplicativo no frontend, é necessário primeiro fazer login com um usuário cadastrado, usuário de login e senha informado estão fornacidos no seeder ou no banco de dados.
 
+Obs.: Para aproveitamento de todas as funcionalidades do apicativo realizar o login como _admin_.
+
 ### Back-end
 
 Para as requisições backend utilizar o ThunderClient, Postman, Insomnia e afins. Basta importar o arquivo de coleção de requisições fornecido e começar as chamadas API.
@@ -74,9 +76,12 @@ Para as requisições backend utilizar o ThunderClient, Postman, Insomnia e afin
 Para as requisições no backend, também é necessário fazer login (POST /login). Após o login bem-sucedido, o backend irá gerar um token (bearer), que será utilizado em algumas requisições para autenticar e autorizar o acesso ao backend.
 , que deve ser apresentado no header Authentication com o seguinte formato: bearer: _token_.
 
-## Senhas
+Obs.: Para aproveitamento de todas as funcionalidades do apicativo realizar o login como _admin_.
+
+### Senhas
 
 Além disso, é importante notar que as senhas armazenadas no banco de dados estão criptografadas para garantir a segurança dos dados. As senhas reais podem ser encontradas nos seeders do projeto, para fins de teste e desenvolvimento.
+
 
 
 ### Rodando os testes locais

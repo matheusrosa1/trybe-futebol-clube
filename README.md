@@ -90,9 +90,7 @@ Para execução dos testes (unitários) utilizar o comando `npm run test` dentro
 
 ## Licença
 
-Licença MIT 
-
-Declare a licença do projeto. Se você está utilizando uma licença padrão (por exemplo, MIT, Apache), inclua o texto da licença no README. Se estiver utilizando uma licença personalizada, forneça informações sobre ela.
+Licença [MIT](https://github.com/matheusrosa1/trybe-futebol-clube?tab=MIT-1-ov-file) 
 
 ## Contato
 

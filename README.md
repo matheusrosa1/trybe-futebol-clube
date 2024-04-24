@@ -61,9 +61,10 @@ A senha padrão para acessar o banco de dados SQL está definida na porta defini
 
 ## Como ultilizar
 
-ThunderClient: Se preferir uma abordagem mais direta e detalhada, você pode fazer suas requisições utilizando o ThunderClient. Basta importar o arquivo de coleção de requisições fornecido e começar a fazer suas chamadas API.
+Para abordagem visual, acessar a aplicação através de porta 3000.
 
-Frontend: Se preferir uma abordagem mais visual, você pode acessar a interface frontend do projeto. Basta abrir seu navegador e acessar a aplicação através da porta padrão 3000. A partir daí, você poderá interagir com a aplicação de forma intuitiva, realizando suas requisições diretamente pela interface."
+Para as requisições backend utilizar o ThunderClient, Postman, Insomnia e afins. Basta importar o arquivo de coleção de requisições fornecido e começar as chamadas API.
+
 
 ### Rodando os testes locais
 

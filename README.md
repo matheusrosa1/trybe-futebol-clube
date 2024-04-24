@@ -55,10 +55,10 @@ A senha padrão para acessar o banco de dados SQL está definida na porta defini
   - Classificação dos Mandantes
   - Classificação dos Visitantes.
 - Alterar os placares das partidas (admin).
-- Filtrar as partidas (admin):
+- Filtrar as partidas:
   - Em andamento
   - Finalizada
-- Finalizar partidas.
+- Finalizar partidas (admin).
 
 ## Como utilizar
 

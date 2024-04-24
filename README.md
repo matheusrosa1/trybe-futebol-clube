@@ -49,21 +49,21 @@ A senha padrão para acessar o banco de dados SQL está definida na porta defini
 
 ## Funcionalidades
 
-- Visualizar a Classificação dos times de acordo com os resultados e suas respectivas estatística dos jogos de cada time.
-- Filtrar a classificação:
-  - Classificação Geral
-  - Classificação dos Mandantes
-  - Classificação dos Visitantes.
 - Alterar os placares das partidas (admin).
 - Filtrar as partidas:
   - Em andamento
   - Finalizada
 - Finalizar partidas (admin).
+- Visualizar a Classificação dos times de acordo com os resultados e suas respectivas estatística dos jogos de cada time.
+- Filtrar a classificação:
+  - Classificação Geral
+  - Classificação dos Mandantes
+  - Classificação dos Visitantes.
 
-A classificação dos times no campeonato é de acordo com o `total de pontos` (decrescente), com o seguinte critério de desempate:
-  - Total de Vitórias;
-  - 2º Saldo de gols;
-  - 3º Gols a favor;
+        A classificação dos times no campeonato é de acordo com o `total de pontos` (decrescente), com o seguinte critério de desempate:
+          - Total de Vitórias;
+          - 2º Saldo de gols;
+          - 3º Gols a favor;
 ## Como utilizar
 
 ### Front-end

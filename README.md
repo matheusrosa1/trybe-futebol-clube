@@ -82,7 +82,7 @@ Para utilizar as funcionalidades do aplicativo no frontend, é necessário prime
 
 ### Back-end
 
-Utilizar ThunderClient, Postman, Insomnia e afins. Basta importar o arquivo de coleção de requisições fornecido e começar as chamadas API.
+Utilizar ThunderClient, Postman, Insomnia e afins. Basta importar o arquivo de coleção de requisições fornecido (trybe-futebol-clube/app/thunder-collection_Trybe Futebol Clube.json) e começar as chamadas API.
 
 Para as requisições no backend, também é necessário fazer login (POST /login). Após o login bem-sucedido, o backend irá gerar um token (bearer), que será utilizado em algumas requisições para autenticar e autorizar o acesso ao backend.
 , que deve ser apresentado no header Authentication com o seguinte formato: bearer: _token_

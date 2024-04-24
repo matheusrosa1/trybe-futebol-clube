@@ -11,9 +11,7 @@
 
 ## Visão Geral
 
-O Trybe Futebol Clube é um projeto desenvolvido como parte da formação em back-end durante o curso da Trybe - Escola de Tecnologia. Este aplicativo é um site informativo que fornece informações sobre partidas e classificações de futebol ⚽️.
-
-Este projeto é construído com o objetivo de demonstrar habilidades em desenvolvimento back-end, utilizando tecnologias como Node.js com TypeScript, Sequelize, Docker, Express, JSON Web Token (JWT), Chai e Mocha para testes.
+O Trybe Futebol Clube é um projeto desenvolvido como parte da formação em back-end durante o curso da Trybe - Escola de Tecnologia. Este aplicativo é um site informativo que fornece informações sobre partidas e classificações de futebol ⚽️. Construído com o objetivo de demonstrar habilidades em desenvolvimento back-end, utilizando tecnologias como Node.js com TypeScript, Sequelize, Docker, Express, JSON Web Token (JWT), Chai e Mocha para testes.
 
 A aplicação segue os princípios do SOLID (Single Responsibility Principle, Open-Closed Principle, Liskov Substitution Principle, Interface Segregation Principle e Dependency Inversion Principle), garantindo um código mais modular, flexível, testável e de fácil manutenção.
 
@@ -101,6 +99,10 @@ Para execução dos testes (unitários) utilizar o comando `npm run test` dentro
 ## Licença
 
 Licença [MIT](https://github.com/matheusrosa1/trybe-futebol-clube?tab=MIT-1-ov-file) 
+
+## Contribuições
+
+ O front-end e o design CSS deste projeto foram elaborados pela escola Trybe.
 
 ## Contato
 

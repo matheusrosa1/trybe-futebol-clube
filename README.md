@@ -1,8 +1,5 @@
 # Trybe Futebol Clube
 
-Projeto realizado para formação em back-end durante o curso da Trybe - Escola de Tecnologia. O aplicativo trata-se de um site informativo sobre partidas e classificações de futebol ⚽️
-
-
 ## Índice
 
 - [Visão Geral](#visão-geral)
@@ -14,7 +11,11 @@ Projeto realizado para formação em back-end durante o curso da Trybe - Escola 
 
 ## Visão Geral
 
-Uma visão geral mais detalhada do projeto, explicando o que ele faz, por que é útil, etc.
+O Trybe Futebol Clube é um projeto desenvolvido como parte da formação em back-end durante o curso da Trybe - Escola de Tecnologia. Este aplicativo é um site informativo que fornece informações sobre partidas e classificações de futebol ⚽️.
+
+Este projeto é construído com o objetivo de demonstrar habilidades em desenvolvimento back-end, utilizando tecnologias como Node.js com TypeScript, Sequelize, Docker, Express, JSON Web Token (JWT), Chai e Mocha para testes.
+
+A aplicação segue os princípios do SOLID (Single Responsibility Principle, Open-Closed Principle, Liskov Substitution Principle, Interface Segregation Principle e Dependency Inversion Principle), garantindo um código mais modular, flexível, testável e de fácil manutenção.
 
 ## Tecnologias Utilizadas
 
@@ -38,7 +39,9 @@ Para instalar as dependências necessárias, execute o comando `npm install` na 
 Para iniciar a aplicação localmente em containers Docker, basta executar o comando `npm run compose:up` na raiz do projeto. Ao instalar o container, se corretamente instalado, os servidores já estarão automaticamente inicializados.
 
 #### Logs do container
+
 ##### Back-end
+
     docker logs -f app_backend
 
 ##### Front-end

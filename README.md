@@ -60,7 +60,7 @@ A senha padrão para acessar o banco de dados SQL está definida na porta defini
   - Finalizada
 - Finalizar partidas (admin).
 
-A classificação dos times no campeonato segue seguinte ordem é de acordo com o `total de pontos`, com o seguinte critério de desempate:
+A classificação dos times no campeonato é de acordo com o `total de pontos` (decrescente), com o seguinte critério de desempate:
   - Total de Vitórias;
   - 2º Saldo de gols;
   - 3º Gols a favor;

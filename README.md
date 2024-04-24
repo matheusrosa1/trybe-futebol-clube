@@ -78,7 +78,7 @@ Para as requisições no backend, também é necessário fazer login (POST /logi
 
 ### Senhas
 
-Além disso, é importante notar que as senhas armazenadas no banco de dados estão criptografadas para garantir a segurança dos dados. As senhas reais podem ser encontradas nos seeders do projeto, para fins de teste e desenvolvimento.
+As senhas armazenadas no banco de dados estão criptografadas e as senhas reais podem ser encontradas nos seeders do projeto, para fins de teste e desenvolvimento.
 
 ### Permissões
 

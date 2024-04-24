@@ -63,6 +63,7 @@ A senha padrão para acessar o banco de dados SQL está definida na porta defini
 ## Como utilizar
 
 ### Front-end
+
 Para abordagem visual, acessar a aplicação através de porta 3000.
 
 Para utilizar as funcionalidades do aplicativo no frontend, é necessário primeiro fazer login com um usuário cadastrado, usuário de login e senha informado estão fornacidos no seeder ou no banco de dados.
@@ -94,4 +95,5 @@ Licença [MIT](https://github.com/matheusrosa1/trybe-futebol-clube?tab=MIT-1-ov-
 
 ## Contato
 
-Instruções sobre como entrar em contato com os mantenedores do projeto. Isso pode incluir links para o perfil do GitHub, endereço de e-mail, etc.
+Linkedin: https://www.linkedin.com/in/matheus-rosa-2a0652201/
+E-mail: matheusrosataxa@gmail.com

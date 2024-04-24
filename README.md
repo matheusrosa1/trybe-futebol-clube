@@ -100,9 +100,16 @@ Para aproveitamento de todas as funcionalidades do apicativo realizar o login co
 
 Utilizar o comando `npm run test` dentro da pasta trybe-futebol-clube/app/backend
 
+## Website
+
+O aplicativo está disponível para consulta no link https://trybe-futebol-clube-production-cd38.up.railway.app/.
+
+As funcionalidades de `admin` podem ser utilizadas somente via localhost, visto que o website é voltado para demonstração de portifólio.
+
 ## Contribuições
 
 O front-end e o design CSS deste projeto foram elaborados pela escola Trybe.
+
 
 ## Licença
 

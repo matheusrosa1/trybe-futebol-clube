@@ -1,6 +1,6 @@
 # Trybe Futebol Clube
 
-O aplicativo trata-se de um site informativo sobre partidas e classificações de futebol ⚽️
+Projeto realizado para formação em back-end durante o curso da Trybe - Escola de Tecnologia. O aplicativo trata-se de um site informativo sobre partidas e classificações de futebol ⚽️
 
 
 ## Índice
@@ -23,6 +23,7 @@ Uma visão geral mais detalhada do projeto, explicando o que ele faz, por que é
 - Sequelize
 - mysql2
 - Express
+- JSON Web Token (Jwt)
 - Chai
 - Mocha
 
@@ -48,22 +49,34 @@ A senha padrão para acessar o banco de dados SQL está definida na porta defini
 
 ## Funcionalidades
 
-- Alterar os placares das partidas.
-- Filtrar as partidas:
-  - Em andamento
-  - Finalizada
-- Finalizar partidas.
-- Classificação dos times de acordo com os resultados e suas respectivas estatística dos jogos de cada time.
+- Visualizar a Classificação dos times de acordo com os resultados e suas respectivas estatística dos jogos de cada time.
 - Filtrar a classificação:
   - Classificação Geral
   - Classificação dos Mandantes
   - Classificação dos Visitantes.
+- Alterar os placares das partidas (admin).
+- Filtrar as partidas (admin):
+  - Em andamento
+  - Finalizada
+- Finalizar partidas.
 
 ## Como ultilizar
 
+### Front-end
 Para abordagem visual, acessar a aplicação através de porta 3000.
 
+Para utilizar as funcionalidades do aplicativo no frontend, é necessário primeiro fazer login com um usuário cadastrado, usuário de login e senha informado estão fornacidos no seeder ou no banco de dados.
+
+### Back-end
+
 Para as requisições backend utilizar o ThunderClient, Postman, Insomnia e afins. Basta importar o arquivo de coleção de requisições fornecido e começar as chamadas API.
+
+Para as requisições no backend, também é necessário fazer login (POST /login). Após o login bem-sucedido, o backend irá gerar um token (bearer), que será utilizado em algumas requisições para autenticar e autorizar o acesso ao backend.
+, que deve ser apresentado no header Authentication com o seguinte formato: bearer: _token_.
+
+## Senhas
+
+Além disso, é importante notar que as senhas armazenadas no banco de dados estão criptografadas para garantir a segurança dos dados. As senhas reais podem ser encontradas nos seeders do projeto, para fins de teste e desenvolvimento.
 
 
 ### Rodando os testes locais

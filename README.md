@@ -82,7 +82,7 @@ Além disso, é importante notar que as senhas armazenadas no banco de dados est
 
 ### Permissões
 
-Obs.: Para aproveitamento de todas as funcionalidades do apicativo realizar o login como _admin_.
+Para aproveitamento de todas as funcionalidades do apicativo realizar o login como _admin_.
 
 ### Rodando os testes locais
 

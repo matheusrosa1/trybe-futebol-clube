@@ -100,13 +100,6 @@ Para aproveitamento de todas as funcionalidades do apicativo realizar o login co
 
 Utilizar o comando `npm run test` dentro da pasta trybe-futebol-clube/app/backend
 
-## Website
-
-O aplicativo está disponível para consulta no link https://trybe-futebol-clube-production-cd38.up.railway.app/.
-
-Para vizualização das partidas e classificação é necessário logar com o usuário `user`, cujas informações de login estão situadas nos seeders ou no banco de dados.
-
-As funcionalidades de `admin` podem ser utilizadas somente via localhost, visto que o website é voltado somente para demonstração de portifólio.
 
 ## Contribuições
 

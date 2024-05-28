@@ -101,11 +101,6 @@ Para aproveitamento de todas as funcionalidades do apicativo realizar o login co
 Utilizar o comando `npm run test` dentro da pasta trybe-futebol-clube/app/backend
 
 
-## Contribuições
-
-O front-end e o design CSS deste projeto foram elaborados pela escola Trybe.
-
-
 ## Licença
 
 Licença [MIT](https://github.com/matheusrosa1/trybe-futebol-clube?tab=MIT-1-ov-file) 

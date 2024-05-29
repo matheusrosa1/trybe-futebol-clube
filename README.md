@@ -109,4 +109,4 @@ Licença [MIT](https://github.com/matheusrosa1/trybe-futebol-clube?tab=MIT-1-ov-
 ## Contato
 
 - Linkedin: https://www.linkedin.com/in/matheus-rosa-2a0652201/
-- E-mail: matheusrosataxa@gmail.com
+- E-mail: matheusrosa.dev@gmail.com
